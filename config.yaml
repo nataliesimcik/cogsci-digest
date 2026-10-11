@@ -1,0 +1,87 @@
+# Cognitive Science Weekly — configuration
+title: "Cognitive Science Weekly"
+lookback_days: 7
+
+# Public address of the site and repo (used for the RSS feed and "suggest" links).
+site_url: "https://nataliesimcik.github.io/cogsci-digest/"
+repo_url: "https://github.com/nataliesimcik/cogsci-digest"
+
+# Used for Crossref/OpenAlex "polite pools" (faster, more reliable). Use a real address.
+contact_email: "nataliesimcik@gmail.com"
+
+# What the lab cares about. The screening model scores relevance against this.
+interests: |
+  Core cognitive psychology and cognitive science: memory, attention, perception
+  and vision, language and psycholinguistics, reasoning, judgment and
+  decision-making, learning, categorization, metacognition, cognitive control,
+  cognitive development and aging, and computational/formal models of cognition
+  (including comparisons of AI models with human cognition). Include cognitive
+  neuroscience when it tests a cognitive theory. Exclude purely clinical, purely
+  cellular/molecular neuroscience, and applied or educational studies that don't
+  speak to cognitive mechanisms.
+
+# Filter topics shown on the site. Each paper gets 1-3 of these.
+# Keys are used in links (#topics=memory,vision); labels are what people see.
+topics:
+  memory: "Memory"
+  attention: "Attention"
+  vision: "Vision & perception"
+  language: "Language"
+  decision: "Reasoning & decisions"
+  learning: "Learning"
+  control: "Cognitive control"
+  development: "Development & aging"
+  social: "Social cognition"
+  emotion: "Emotion & motivation"
+  metacognition: "Metacognition"
+  models: "Computational models"
+  ai: "AI & cognition"
+  neuro: "Cognitive neuroscience"
+  methods: "Methods & replication"
+
+min_relevance: 6        # 0-10; papers scored below this are dropped
+max_papers: 60          # cap per week (highest scores kept)
+top_picks: 8            # highest-scoring papers marked as top picks
+
+models:
+  screen: claude-haiku-5-5     # relevance + topic tagging
+  write: claude-sonnet-5-5     # summaries, overview, conference lookups
+
+sources:
+  journals:   # Crossref by ISSN. Publisher doesn't matter: Elsevier, APA, Springer, Wiley, SAGE...
+    # Elsevier
+    - {name: "Cognition", issn: "0010-0277"}
+    - {name: "Cognitive Psychology", issn: "0010-0285"}
+    - {name: "Trends in Cognitive Sciences", issn: "1364-6613"}
+    - {name: "Journal of Memory and Language", issn: "0749-596X"}
+    - {name: "Vision Research", issn: "0042-6989"}
+    - {name: "Cortex", issn: "0010-9452"}
+    - {name: "Neuropsychologia", issn: "0028-3932"}
+    # APA
+    - {name: "Psychological Review", issn: "0033-295X"}
+    - {name: "Journal of Experimental Psychology: General", issn: "0096-3445"}
+    - {name: "JEP: Learning, Memory, and Cognition", issn: "0278-7393"}
+    - {name: "JEP: Human Perception and Performance", issn: "0096-1523"}
+    # Springer (Psychonomic Society)
+    - {name: "Psychonomic Bulletin & Review", issn: "1069-9384"}
+    - {name: "Memory & Cognition", issn: "0090-502X"}
+    - {name: "Attention, Perception, & Psychophysics", issn: "1943-3921"}
+    # Others
+    - {name: "Cognitive Science", issn: "1551-6709"}
+    - {name: "Psychological Science", issn: "0956-7976"}
+    - {name: "Nature Human Behaviour", issn: "2397-3374"}
+    - {name: "Journal of Vision", issn: "1534-7362"}
+    - {name: "Journal of Cognitive Neuroscience", issn: "0898-929X"}
+    - {name: "Open Mind", issn: "2470-2986"}
+  arxiv_queries:
+    - "cat:q-bio.NC"
+    - "cat:cs.CL AND abs:cognitive"
+    - "cat:cs.AI AND abs:\"human cognition\""
+  psyarxiv: true
+  biorxiv_categories:
+    - "animal behavior and cognition"
+    - "neuroscience"
+
+conferences:
+  refresh_days: 14                     # re-check each conference this often
+  web_search_tool: "web_search_20250305"

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cognitive Science Weekly</title>
+<link rel="alternate" type="application/rss+xml" title="Cognitive Science Weekly" href="feed.xml">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F3F5F7; --surface: #FFFFFF; --ink: #172033; --muted: #5A6478;
+  --rule: #D9DEE6; --accent: #2F4BD8; --accent-soft: #E6EAFB;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #12161F; --surface: #1A2030; --ink: #E6EAF2; --muted: #9AA4B8;
+          --rule: #2A3244; --accent: #8EA2FF; --accent-soft: #232C4A; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 var(--sans); }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 32px 24px 64px; }
+header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+h1 { font: 600 2rem/1.15 var(--serif); margin: 0; letter-spacing: -0.01em; }
+.sub { color: var(--muted); margin: 6px 0 0; }
+select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--rule);
+         border-radius: 6px; padding: 7px 10px; }
+
+/* Topic strip: the mix of this week's topics, and the filter */
+.strip { display: flex; height: 34px; margin: 28px 0 10px; border-radius: 4px; overflow: hidden; gap: 2px; }
+.strip button { border: 0; padding: 0; min-width: 6px; background: var(--c); opacity: .9;
+                transition: opacity .15s, flex-grow .25s; }
+.strip button:hover { opacity: 1; }
+.filtering .strip button:not([aria-pressed="true"]) { opacity: .22; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 6px; margin: 0; padding: 0; list-style: none; }
+.legend button { display: inline-flex; align-items: center; gap: 7px; border: 1px solid transparent;
+                 background: none; border-radius: 999px; padding: 3px 10px 3px 8px; font-size: .9rem; }
+.legend button::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+.legend button[aria-pressed="true"] { border-color: var(--c); background: var(--surface); font-weight: 700; }
+.legend .n { color: var(--muted); font-weight: 400; }
+.legend .clear { color: var(--accent); }
+.legend .clear::before { display: none; }
+
+.tools { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin: 16px 0 0; }
+.tools input[type=search] { flex: 1 1 260px; max-width: 420px; font: inherit; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 12px; }
+.tools label { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); }
+.count { color: var(--muted); margin-left: auto; font-size: .9rem; }
+
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; margin-top: 28px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; gap: 40px; } }
+
+.overview { font: 1.15rem/1.6 var(--serif); max-width: 68ch; margin: 0 0 28px; padding-bottom: 28px;
+            border-bottom: 1px solid var(--rule); }
+.papers { list-style: none; margin: 0; padding: 0; }
+.paper { position: relative; padding: 20px 0 20px 20px; border-bottom: 1px solid var(--rule); max-width: 72ch; }
+.paper::before { content: ""; position: absolute; left: 0; top: 24px; bottom: 24px; width: 4px;
+                 border-radius: 2px; background: var(--c, var(--rule)); }
+.paper h2 { font: 600 1.18rem/1.35 var(--serif); margin: 0 0 4px; }
+.paper h2 a { color: var(--ink); text-decoration: none; }
+.paper h2 a:hover { text-decoration: underline; text-decoration-color: var(--rule); }
+.meta { color: var(--muted); font-size: .92rem; margin: 0 0 8px; }
+.meta cite { font-style: italic; }
+.pick { color: var(--accent); font-weight: 700; margin-right: 6px; }
+.summary { margin: 0 0 10px; font: 1rem/1.62 var(--serif); }
+.tags { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.tags button { border: 0; background: none; padding: 0; font-size: .84rem; color: var(--muted);
+               display: inline-flex; align-items: center; gap: 6px; }
+.tags button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.tags button:hover { color: var(--ink); }
+.empty { color: var(--muted); padding: 24px 0; max-width: 60ch; }
+.empty button { border: 0; background: none; color: var(--accent); padding: 0; text-decoration: underline; }
+
+/* Deadlines panel */
+aside { align-self: start; position: sticky; top: 20px; background: var(--surface); border: 1px solid var(--rule);
+        border-radius: 10px; padding: 20px; }
+@media (max-width: 900px) {
+  aside { position: static; order: -1; }
+  aside:not(.expanded) .dl:nth-child(n+4) { display: none; }
+}
+.show-all { display: none; border: 0; background: none; color: var(--accent); padding: 8px 0 0; font-size: .9rem; }
+@media (max-width: 900px) { aside.has-more .show-all { display: block; } }
+aside h2 { font: 600 1.25rem/1.2 var(--serif); margin: 0 0 12px; }
+.regions { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.regions button { border: 1px solid var(--rule); background: none; border-radius: 6px; padding: 3px 9px; font-size: .85rem; }
+.regions button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.deadlines { list-style: none; margin: 0; padding: 0; }
+.dl { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.dl:last-child { border-bottom: 0; }
+.dl .when { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.dl .when strong { font-weight: 700; }
+.dl .what { color: var(--muted); font-size: .85rem; margin: 0; }
+.dl .left { color: var(--muted); white-space: nowrap; }
+.dl.soon .left { color: var(--accent); font-weight: 700; }
+.dl .name { display: block; margin: 2px 0; color: var(--ink); text-decoration: none; font-weight: 700; line-height: 1.3; }
+.dl .name:hover { text-decoration: underline; }
+.dl .where, .dl .more { color: var(--muted); font-size: .85rem; margin: 0; }
+.dl .more a { color: var(--muted); }
+details { margin-top: 12px; font-size: .9rem; }
+summary { cursor: pointer; color: var(--muted); }
+details ul { list-style: none; padding: 0; margin: 8px 0 0; }
+details li { padding: 6px 0; border-top: 1px solid var(--rule); }
+details li span { color: var(--muted); display: block; font-size: .85rem; }
+.panel-foot { margin: 16px 0 0; padding-top: 12px; border-top: 1px solid var(--rule); font-size: .82rem; color: var(--muted); }
+.panel-foot p { margin: 0 0 6px; }
+.links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: .9rem; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <header>
+    <div>
+      <h1 id="title">Cognitive Science Weekly</h1>
+      <p class="sub" id="sub">Loading this week's papers…</p>
+    </div>
+    <label><span class="visually-hidden">Week</span><select id="week" aria-label="Choose a week"></select></label>
+  </header>
+
+  <div class="strip" id="strip" role="group" aria-label="Topics this week"></div>
+  <ul class="legend" id="legend" aria-label="Filter by topic"></ul>
+
+  <div class="tools">
+    <input type="search" id="q" placeholder="Search titles, authors, summaries" aria-label="Search papers">
+    <label><input type="checkbox" id="top"> Top picks only</label>
+    <span class="count" id="count" aria-live="polite"></span>
+  </div>
+
+  <div class="layout">
+    <main>
+      <p class="overview" id="overview" hidden></p>
+      <ol class="papers" id="papers"></ol>
+    </main>
+    <aside aria-labelledby="dl-h">
+      <h2 id="dl-h">Upcoming deadlines</h2>
+      <div class="regions" id="regions" role="group" aria-label="Filter by region"></div>
+      <ul class="deadlines" id="deadlines"></ul>
+      <button class="show-all" id="show-all" aria-expanded="false">Show all deadlines</button>
+      <details id="tba" hidden><summary></summary><ul></ul></details>
+      <div class="panel-foot">
+        <p id="dl-note">Dates are checked weekly with web search. Confirm on the official site before submitting.</p>
+        <div class="links">
+          <a href="feed.xml">Subscribe via RSS</a>
+          <a id="suggest" href="#" hidden>Suggest a conference</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const PALETTE = ["#3E7CB1","#D1495B","#E0A030","#00798C","#8E6C8A","#5E9E78","#E07A5F",
+  "#5E60CE","#A44A3F","#2E9CCA","#B8961E","#7B8C3A","#B5838D","#5C6283","#F28F3B"];
+const REGIONS = ["All", "Europe", "North America", "Online", "Other"];
+const $ = id => document.getElementById(id);
+const state = { index: null, week: null, data: null, topics: new Set(), q: "", top: false,
+                region: "All", confs: [] };
+const color = {};
+
+function el(tag, attrs = {}, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "style") n.style.cssText = v;
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else if (v !== false && v != null) n.setAttribute(k, v === true ? "" : v);
+  }
+  for (const c of kids.flat()) if (c != null) n.append(c);
+  return n;
+}
+const fmt = (iso, opts = { month: "short", day: "numeric", year: "numeric" }) =>
+  new Date(iso + "T12:00:00").toLocaleDateString(undefined, opts);
+const label = k => (state.index.topics.find(t => t.key === k) || {}).label || k;
+
+// ----- URL hash + remembered filters -----
+function readHash() {
+  const h = new URLSearchParams(location.hash.slice(1));
+  if (h.get("week")) state.week = h.get("week");
+  if (h.has("topics")) state.topics = new Set(h.get("topics").split(",").filter(Boolean));
+  else try { const s = localStorage.getItem("cogsci-topics");
+             if (s) state.topics = new Set(JSON.parse(s)); } catch (e) {}
+}
+function writeHash() {
+  const h = new URLSearchParams();
+  if (state.week && state.week !== state.index.weeks[0]) h.set("week", state.week);
+  if (state.topics.size) h.set("topics", [...state.topics].join(","));
+  history.replaceState(null, "", h.toString() ? "#" + h : location.pathname);
+  try { localStorage.setItem("cogsci-topics", JSON.stringify([...state.topics])); } catch (e) {}
+}
+
+// ----- papers -----
+function toggleTopic(k) {
+  state.topics.has(k) ? state.topics.delete(k) : state.topics.add(k);
+  writeHash(); renderPapers();
+}
+function visible() {
+  const q = state.q.toLowerCase();
+  return state.data.papers.filter(p =>
+    (!state.top || p.highlight) &&
+    (!state.topics.size || (p.topics || []).some(t => state.topics.has(t))) &&
+    (!q || [p.title, p.authors, p.summary, p.venue].join(" ").toLowerCase().includes(q)));
+}
+function renderStrip() {
+  const counts = {};
+  for (const p of state.data.papers) for (const t of p.topics || []) counts[t] = (counts[t] || 0) + 1;
+  const keys = state.index.topics.map(t => t.key).filter(k => counts[k]);
+  $("strip").replaceChildren(...keys.map(k => el("button", {
+    style: `--c:${color[k]};flex-grow:${counts[k]}`, title: `${label(k)} (${counts[k]})`,
+    "aria-label": `${label(k)}, ${counts[k]} papers`, "aria-pressed": String(state.topics.has(k)),
+    onclick: () => toggleTopic(k) })));
+  const items = keys.map(k => el("li", {}, el("button", {
+    style: `--c:${color[k]}`, "aria-pressed": String(state.topics.has(k)), onclick: () => toggleTopic(k)
+  }, label(k), " ", el("span", { class: "n" }, String(counts[k])))));
+  if (state.topics.size) items.push(el("li", {}, el("button", { class: "clear",
+    onclick: () => { state.topics.clear(); writeHash(); renderPapers(); } }, "Clear filters")));
+  $("legend").replaceChildren(...items);
+  $("app").classList.toggle("filtering", state.topics.size > 0);
+}
+function renderPapers() {
+  renderStrip();
+  const list = visible(), total = state.data.papers.length;
+  $("count").textContent = list.length === total ? `${total} papers` : `${list.length} of ${total} papers`;
+  if (!list.length) {
+    $("papers").replaceChildren(el("li", { class: "empty" }, total
+      ? ["No papers match these filters. ", el("button", { onclick: () => {
+          state.topics.clear(); state.q = ""; state.top = false; $("q").value = ""; $("top").checked = false;
+          writeHash(); renderPapers(); } }, "Clear all filters")]
+      : "Nothing matched the lab's interests this week."));
+    return;
+  }
+  $("papers").replaceChildren(...list.map(p => {
+    const ts = p.topics || [];
+    const main = ts.find(t => state.topics.has(t)) || ts[0];
+    return el("li", { class: "paper", style: main ? `--c:${color[main]}` : "" },
+      el("h2", {}, el("a", { href: p.url, target: "_blank", rel: "noopener" }, p.title)),
+      el("p", { class: "meta" },
+        p.highlight ? el("span", { class: "pick" }, "Top pick") : null,
+        p.authors ? p.authors + ", " : "", el("cite", {}, p.venue)),
+      p.summary ? el("p", { class: "summary" }, p.summary) : null,
+      el("div", { class: "tags" }, (p.topics || []).map(t => el("button", {
+        style: `--c:${color[t]}`, onclick: () => toggleTopic(t), title: `Show only ${label(t)}`
+      }, label(t)))));
+  }));
+}
+async function loadWeek(w) {
+  state.week = w;
+  $("week").value = w;
+  const r = await fetch(`data/weeks/${w}.json`);
+  if (!r.ok) throw new Error(`Couldn't load week ${w}`);
+  state.data = await r.json();
+  const d = state.data;
+  $("sub").textContent = `Papers and preprints from ${fmt(d.since, { month: "short", day: "numeric" })} to ` +
+    `${fmt(d.until)}. ${d.fetched} new items screened, ${d.papers.length} selected for the lab.`;
+  $("overview").textContent = d.overview || "";
+  $("overview").hidden = !d.overview;
+  writeHash(); renderPapers();
+}
+
+// ----- deadlines -----
+function renderDeadlines() {
+  const today = new Date().toISOString().slice(0, 10);
+  const inRegion = c => state.region === "All" || c.region === state.region;
+  const upcoming = [], tba = [];
+  for (const c of state.confs.filter(inRegion)) {
+    const next = (c.deadlines || []).filter(d => d.date >= today).sort((a, b) => a.date.localeCompare(b.date));
+    next.length ? upcoming.push({ c, next }) : tba.push(c);
+  }
+  upcoming.sort((a, b) => a.next[0].date.localeCompare(b.next[0].date));
+  $("regions").replaceChildren(...REGIONS.filter(r => r === "All" || state.confs.some(c => c.region === r))
+    .map(r => el("button", { "aria-pressed": String(state.region === r),
+      onclick: () => { state.region = r; renderDeadlines(); } }, r)));
+
+  const days = d => Math.round((new Date(d + "T12:00:00") - new Date(today + "T12:00:00")) / 864e5);
+  $("deadlines").replaceChildren(...(upcoming.length ? upcoming.map(({ c, next }) => {
+    const n = days(next[0].date);
+    const where = [c.location, c.dates].filter(Boolean).join(", ");
+    return el("li", { class: "dl" + (n <= 14 ? " soon" : "") },
+      el("div", { class: "when" }, el("strong", {}, fmt(next[0].date)),
+        el("span", { class: "left" }, n === 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`)),
+      el("p", { class: "what" }, next[0].label),
+      el("a", { class: "name", href: c.official_url || c.source_url || "#", target: "_blank", rel: "noopener" },
+        c.edition || c.name),
+      where ? el("p", { class: "where" }, where) : null,
+      el("p", { class: "more" },
+        next.slice(1).map(d => `${d.label}: ${fmt(d.date, { month: "short", day: "numeric" })}. `),
+        c.source_url ? el("a", { href: c.source_url, target: "_blank", rel: "noopener" }, "Source") : null));
+  }) : [el("li", { class: "empty" }, state.confs.length
+        ? "No announced deadlines in this region yet." : "Deadlines appear after the first weekly run.")]));
+
+  const aside = document.querySelector("aside");
+  aside.classList.toggle("has-more", upcoming.length > 3 && !aside.classList.contains("expanded"));
+  const box = $("tba");
+  box.hidden = !tba.length;
+  box.querySelector("summary").textContent = `Not announced yet (${tba.length})`;
+  box.querySelector("ul").replaceChildren(...tba.map(c => el("li", {},
+    el("a", { href: c.official_url || "#", target: "_blank", rel: "noopener" }, c.edition || c.name),
+    el("span", {}, [c.typical_timing, c.location].filter(Boolean).join(". ") || "Dates not published"))));
+}
+
+// ----- boot -----
+(async function () {
+  try {
+    const r = await fetch("data/index.json");
+    if (!r.ok) throw new Error("no index");
+    state.index = await r.json();
+  } catch (e) {
+    $("sub").textContent = "The first digest appears after the weekly run. To create it now, open the repo's Actions tab and run the workflow.";
+    ["strip", "legend"].forEach(id => $(id).hidden = true);
+    document.querySelector(".tools").hidden = true;
+    state.index = { topics: [], weeks: [] };
+  }
+  const idx = state.index;
+  if (idx.title) { $("title").textContent = idx.title; document.title = idx.title; }
+  if (idx.repo_url) {
+    const s = $("suggest");
+    s.href = idx.repo_url.replace(/\/$/, "") + "/issues/new?title=" +
+      encodeURIComponent("Add conference: ") + "&body=" + encodeURIComponent("Name:\nWebsite:\n");
+    s.hidden = false;
+  }
+  idx.topics.forEach((t, i) => color[t.key] = PALETTE[i % PALETTE.length]);
+  $("week").replaceChildren(...idx.weeks.map(w => el("option", { value: w }, "Week of " + fmt(w))));
+  $("week").hidden = !idx.weeks.length;
+
+  $("show-all").addEventListener("click", () => {
+    const a = document.querySelector("aside");
+    a.classList.add("expanded"); a.classList.remove("has-more");
+    $("show-all").setAttribute("aria-expanded", "true");
+  });
+  readHash();
+  $("q").addEventListener("input", e => { state.q = e.target.value; renderPapers(); });
+  $("top").addEventListener("change", e => { state.top = e.target.checked; renderPapers(); });
+  $("week").addEventListener("change", e => loadWeek(e.target.value).catch(err => $("sub").textContent = err.message));
+
+  fetch("data/conferences.json").then(r => r.ok ? r.json() : { conferences: [] })
+    .then(d => { state.confs = d.conferences || [];
+                 if (d.updated) $("dl-note").textContent =
+                   `Checked with web search, last on ${fmt(d.updated)}. Confirm on the official site before submitting.`;
+                 renderDeadlines(); })
+    .catch(() => renderDeadlines());
+
+  if (idx.weeks.length) {
+    const w = idx.weeks.includes(state.week) ? state.week : idx.weeks[0];
+    loadWeek(w).catch(err => $("sub").textContent = err.message);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+# Conferences shown in the deadlines panel.
+# Claude looks up the next edition's dates and deadlines with web search.
+# To pin values by hand (they win over the lookup), add any of:
+#   location, region (Europe | North America | Online | Other), dates,
+#   deadlines: [{label: "Abstracts", date: "2027-02-01"}]
+# Lab members: add a conference with a pull request or open an issue.
+
+- name: "CogSci (Cognitive Science Society)"
+  url: "https://cognitivesciencesociety.org"
+- name: "Psychonomic Society Annual Meeting"
+  url: "https://www.psychonomic.org"
+- name: "ESCoP (European Society for Cognitive Psychology)"
+  url: "https://www.escop.eu"
+- name: "Experimental Psychology Society (EPS) meetings"
+  url: "https://eps.ac.uk"
+- name: "TeaP (Tagung experimentell arbeitender Psycholog:innen)"
+- name: "Cognitive Neuroscience Society (CNS)"
+  url: "https://www.cogneurosociety.org"
+- name: "Cognitive Computational Neuroscience (CCN)"
+  url: "https://ccneuro.org"
+- name: "Vision Sciences Society (VSS)"
+  url: "https://www.visionsciences.org"
+- name: "European Conference on Visual Perception (ECVP)"
+- name: "AMLaP (Architectures and Mechanisms for Language Processing)"
+- name: "HSP (Human Sentence Processing)"
+- name: "MathPsych / ICCM"
+  url: "https://mathpsych.org"
+- name: "OHBM Annual Meeting"
+  url: "https://www.ohbmweb.org"
+- name: "FENS Forum"
+  url: "https://www.fens.org"
+- name: "SfN Neuroscience"
+  url: "https://www.sfn.org"
