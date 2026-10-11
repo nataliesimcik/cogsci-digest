@@ -1,0 +1,925 @@
+{
+ "week": "2026-10-11",
+ "since": "2026-10-04",
+ "until": "2026-10-11",
+ "fetched": 398,
+ "overview": "This week's papers cluster around how memory and attention are shaped by structure and by the limits of processing. Two memory studies show that later events can reshape what is retained: threat conditioning retroactively improved 24-hour recognition of the starting category in a sequence that ended in a shock-predictive category, and EEG evidence linked temporally guided attention shifts in working memory to long-term forgetting of the deprioritized item. A third memory study found that highly memorable images lose accuracy under short retrieval deadlines just as low-memorability images do, which favors a resource-dependent account over a resilience account. On the development side, children aged 9-10 showed independence between stability and flexibility rather than a trade-off, and successor knowledge, not approximate-magnitude mappings, predicted understanding of the later-greater principle. Two results stand out for the gap between model or normative predictions and human behavior: language models of varying architecture and size underestimated the human integration cost of long-distance subject-verb dependencies in a large self-paced reading dataset, and participants in the counterfactual decision study were far from optimal because of faulty inference, a weakness that statistical expertise did not remedy. A recurrent network account of perceptual grouping in natural scenes rounds out the set, with dynamics that predicted human reaction times.",
+ "papers": [
+  {
+   "id": "doi:10.1016/j.cognition.2026.106731",
+   "title": "Aversive learning retroactively modulates neutral episodic memories structured by prior knowledge of predictive sequences",
+   "authors": "Blazej M. Baczkowski, Arno Villringer",
+   "venue": "Cognition",
+   "url": "https://doi.org/10.1016/j.cognition.2026.106731",
+   "date": "2026-10-9",
+   "score": 9,
+   "topics": [
+    "memory",
+    "learning",
+    "emotion"
+   ],
+   "summary": "Young adults learned two deterministic category sequences (A->B->C, D->E->F), incidentally encoded trial-unique exemplars during sequence viewing, then underwent threat conditioning in which third-position category C predicted shock and F did not. At 24 hours, when a sequence ended in the shock-predictive category, recognition memory for the starting category (A) was better than for the middle category (B), with no such effect in the control sequence (D, E). The authors conclude that aversive learning can retroactively reshape memory for earlier neutral events when prior sequence knowledge links them to the threat.",
+   "highlight": true
+  },
+  {
+   "id": "doi:10.1016/j.cogpsych.2026.101850",
+   "title": "Independent regulation of cognitive stability and flexibility in both intra-task and inter-task contexts among children",
+   "authors": "Xiang Xu, Weixiao Lv, Jiahui Ma et al.",
+   "venue": "Cognitive Psychology",
+   "url": "https://doi.org/10.1016/j.cogpsych.2026.101850",
+   "date": "2026-10-9",
+   "score": 9,
+   "topics": [
+    "control",
+    "development"
+   ],
+   "summary": "Across three experiments with 38 adults and 73 children aged 9-10, the study measured stability (consistency effect, Stroop congruency effect) and flexibility (rule-switch costs) within and across tasks. Within a task the results supported a two-dimensional model, and the Stroop congruency effect did not correlate significantly with switch costs across tasks. The authors conclude that stability and flexibility are independent in middle childhood rather than traded off against each other.",
+   "highlight": true
+  },
+  {
+   "id": "doi:10.1016/j.neuropsychologia.2026.109602",
+   "title": "Temporal expectation triggers priority shifts in working memory that lead to forgetting",
+   "authors": "Ziyi Duan, Ziyao Zhang, Jarrod A. Lewis-Peacock",
+   "venue": "Neuropsychologia",
+   "url": "https://doi.org/10.1016/j.neuropsychologia.2026.109602",
+   "date": "2026-10-6",
+   "score": 9,
+   "topics": [
+    "memory",
+    "attention"
+   ],
+   "summary": "In an EEG study (N = 20), participants encoded a face and a scene with short and long probe delays, and MVPA tracked neural evidence for each item as attention shifted between them during the delay. Long-term forgetting of the deprioritized item was associated with a marked drop in its neural evidence together with a concurrent rise in evidence for the newly prioritized item. The findings link temporally guided prioritization dynamics in working memory to what is later retained in long-term memory.",
+   "highlight": true
+  },
+  {
+   "id": "doi:10.1037/xhp0001460",
+   "title": "Memorability under pressure: Memorable images are not resilient to retrieval deadlines.",
+   "authors": "Guy Sheffi, Tal Makovski",
+   "venue": "JEP: Human Perception and Performance",
+   "url": "https://doi.org/10.1037/xhp0001460",
+   "date": "2026-10-8",
+   "score": 9,
+   "topics": [
+    "memory",
+    "decision"
+   ],
+   "summary": "Three recognition experiments (old-new and two-alternative forced-choice) imposed strict response deadlines to test whether high-memorability images resist retrieval time pressure. High-memorability images were remembered better in all conditions, but their performance declined under short deadlines just as it did for low-memorability images. This favors a resource-dependent account over a resilience account, suggesting memorability confers an early processing advantage but no special robustness at retrieval.",
+   "highlight": true
+  },
+  {
+   "id": "doi:10.1111/cogs.70267",
+   "title": "One, Two, Three, Four… What's More? Successor Relations, not Mappings to Approximate Magnitudes, Support Learning the Later‐Greater Principle",
+   "authors": "Urvi Maheshwari, David Barner",
+   "venue": "Cognitive Science",
+   "url": "https://doi.org/10.1111/cogs.70267",
+   "date": "2026-10-5",
+   "score": 9,
+   "topics": [
+    "development",
+    "language"
+   ],
+   "summary": "Two experiments (N = 60 each) tested whether children's grasp of the \"later-greater\" principle comes from mapping number words onto approximate magnitudes (ANS) or from knowledge of successor relations between number words. Children used ANS mappings to compare small number words but not larger ones, and successor knowledge, not ANS mappings, predicted later-greater knowledge. The authors conclude that successor relations are implicated in learning the principle.",
+   "highlight": true
+  },
+  {
+   "id": "arxiv:2610.05419",
+   "title": "Recurrent network dynamics explain the time course of perceptual grouping in natural scenes",
+   "authors": "Sami Mollard, Alekh K. Ashok, Lore Goetschalckx et al.",
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.05419",
+   "date": "2026-10-04",
+   "score": 9,
+   "topics": [
+    "vision",
+    "models"
+   ],
+   "summary": "The authors propose a framework in which recurrent interactions propagate enhanced activity within and between cortical areas, with local boundary signals driving early grouping and top-down feedback about object identity driving later grouping. A brain-inspired recurrent neural network trained to group features in natural images learned to spread enhanced activity across a cued object and its dynamics predicted human reaction times. The work offers a mechanistic account of perceptual grouping in natural scenes and generates testable predictions.",
+   "highlight": true
+  },
+  {
+   "id": "arxiv:2610.08208",
+   "title": "STRUCTURALCOST: A controlled reading time dataset for modeling human sentence processing difficulty",
+   "authors": "Nina Nusbaumer, Iria de-Dios-Flores, Corentin Bel et al.",
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.08208",
+   "date": "2026-10-06",
+   "score": 9,
+   "topics": [
+    "language",
+    "models"
+   ],
+   "summary": "The authors present STRUCTURALCOST, a self-paced reading dataset (475 participants, 40,800 observations) isolating the cost of long-distance subject-verb dependencies. Reading times at the main verb increased with dependency length, driven by syntactic embedding beyond linear distance, replicating an earlier low-powered finding. Language models (n-gram, SSM, transformer) partly reproduced this pattern but underestimated human integration cost regardless of architecture or size, suggesting they capture prediction but not the working-memory-related integration cost.",
+   "highlight": true
+  },
+  {
+   "id": "psyarxiv:pwak4_v1",
+   "title": "Making good decisions with counterfactuals",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/pwak4_v1/",
+   "date": "2026-10-10",
+   "score": 9,
+   "topics": [
+    "decision"
+   ],
+   "summary": "In three experiments (N = 354), participants decided whether to act using observational and experimental data. Performance was above chance but far from optimal, and feedback including counterfactual outcomes did not improve it. The failure arose at the inference step, as estimates of who would benefit, be harmed or be unaffected were nearly unrelated to normative predictions, though decisions followed coherently from those estimates. Experts in statistics, economics and data science decided better than novices but were no more accurate in counterfactual inference.",
+   "highlight": true
+  },
+  {
+   "id": "psyarxiv:3zjnu_v1",
+   "title": "Individual Differences in Spillover During Naturalistic Reading",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/3zjnu_v1/",
+   "date": "2026-10-09",
+   "score": 9,
+   "topics": [
+    "language",
+    "methods"
+   ],
+   "summary": "Using six naturalistic eye-tracking reading datasets and Bayesian hierarchical models, the authors estimated individual-level spillover effects of preceding-word length, frequency and surprisal, and assessed their cross-context reliability, which was strongest for length and weaker for frequency and surprisal. Low-fluency readers showed greater spillover from length and frequency, while high-fluency readers showed more spillover from surprisal, and spillover related to skipping and regression rates. The results suggest population-level averages can obscure distinct reader profiles.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:dsk5r_v1",
+   "title": "The Emergent Structure of Memory Phenomenology Depends on Whether Memories Are More Episodic or Semantic",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/dsk5r_v1/",
+   "date": "2026-10-09",
+   "score": 9,
+   "topics": [
+    "memory",
+    "methods"
+   ],
+   "summary": "A large online sample described memories and completed a new phenomenology questionnaire, and folded bottom-up factor analyses yielded five stable dimensions: imagery, autonoetic consciousness, mental time travel, relational memory and semantic memory. The structure generalized across recent and remote episodic prompts, but a semantic prompt produced distinct versions of mental time travel and relational memory. The results support the link between episodic memory theory and phenomenology, and identify strategic use of semantic knowledge during recall as a separate dimension.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:rj67g_v1",
+   "title": "Mapping the Representational Basis of Object-Based Guidance: How Colour Availability Shapes Contributions Across the Hierarchy",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/rj67g_v1/",
+   "date": "2026-10-09",
+   "score": 9,
+   "topics": [
+    "attention",
+    "vision"
+   ],
+   "summary": "Using fixation data from the Potsdam Eye-Movement Corpus, the authors related object selection to cue-object similarity in several computational spaces (layers of a deep CNN, category-level visual prototypes, and distributional semantic representations) in colour and grayscale scenes. Image-based, category-level visual and semantic information contributed complementarily in both conditions, colour similarity explained only part of this profile, and removing colour changed some image-based associations but largely preserved the overall pattern. The authors conclude that in more naturalistic search, guidance draws on multiple representational levels, with colour playing a limited role.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:9ye3r_v1",
+   "title": "Visual search shifts weight up the visual hierarchy from attentional guidance to verification",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/9ye3r_v1/",
+   "date": "2026-10-09",
+   "score": 9,
+   "topics": [
+    "attention",
+    "vision",
+    "ai"
+   ],
+   "summary": "Using a deep CNN to estimate target-distractor similarity at different levels of the visual hierarchy, the authors manipulated similarity in a 2AFC search task while recording eye movements. First fixations (guidance) were predicted mainly by low-level similarity, whereas dwell time on distractors (verification) showed a clear shift toward high-level similarity, with the relative weight of high-level similarity nearly doubling. The results suggest that template information is used at different representational depths across search stages.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:9tvkw_v1",
+   "title": "Intrusive and voluntary memory from a single system: A retrieved-context account of selective interference in the trauma-film paradigm",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/9tvkw_v1/",
+   "date": "2026-10-09",
+   "score": 9,
+   "topics": [
+    "memory",
+    "models"
+   ],
+   "summary": "The authors extend an emotional Context Maintenance and Retrieval (eCMR) model to account for the finding that a film reminder followed by Tetris reduces intrusions but spares voluntary memory. In simulations, task memories compete with film memories cued by shared context, and reproducing the selective pattern required sustained support from a retrieval cue distinguishing film from task material during deliberate recall. This indicates selective interference can arise within a single memory system without separate intrusive and voluntary representations.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:xdu98_v1",
+   "title": "Is Guessing to Blame? Comparing Two Accounts of Attenuated Monitoring Accuracy in Recognition-Based Metamemory Judgments",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/xdu98_v1/",
+   "date": "2026-10-09",
+   "score": 9,
+   "topics": [
+    "metacognition",
+    "memory",
+    "models"
+   ],
+   "summary": "The authors derived predictions for the manifest correlation between judgments of learning and recognition performance under the two-high-threshold model (which includes guessing) and signal detection theory, and tested them in an experiment manipulating response bias. The two-high-threshold model accounted for the observed difference between conditions with a single latent correlation, while signal detection theory did not. This suggests guessing contaminates the commonly used manifest correlations, and that modeling the process can recover the underlying monitoring accuracy.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:5spjk_v2",
+   "title": "The Limits of Identifiability in the Self-Exciting Ornstein–Uhlenbeck Model",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/5spjk_v2/",
+   "date": "2026-10-09",
+   "score": 9,
+   "topics": [
+    "decision",
+    "models"
+   ],
+   "summary": "Using asymptotic arguments and extensive simulations, the authors show that under certain conditions key parameters of the self-exciting Ornstein-Uhlenbeck evidence-accumulation model, proposed to capture confirmation bias under speed emphasis, are not jointly identifiable. They explain the cause of the problem, examine its consequences for model-based inference, and suggest ways to resolve or mitigate it. This bears on whether this model can be used to distinguish its account of speed-accuracy tradeoffs from boundary-based accounts.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:a87pj_v3",
+   "title": "The Description–Experience Gap in Loss Aversion",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/a87pj_v3/",
+   "date": "2026-10-08",
+   "score": 9,
+   "topics": [
+    "decision",
+    "learning"
+   ],
+   "summary": "The authors tested whether the description–experience gap extends to loss aversion. A meta-reanalysis of raw data from existing studies (88,409 choices; N_Desc = 439, N_Exp = 468) and a preregistered experiment (19,435 choices; N = 202 per group) both found stronger loss aversion, as estimated with cumulative prospect theory, in experience-based than description-based choices. The gap also appeared in an analysis that does not rely on a latent loss aversion parameter, and a reinforcement learning model suggests asymmetric learning from positive versus negative prediction errors during sampling as a possible mechanism.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:fz94u_v3",
+   "title": "Assessing psychological, neural and AI-based representational geometries across multiple similarity properties",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/fz94u_v3/",
+   "date": "2026-10-07",
+   "score": 9,
+   "topics": [
+    "neuro",
+    "ai",
+    "models"
+   ],
+   "summary": "The study collected pairwise similarity ratings for 280 objects across eight properties and used RSA and multidimensional scaling to identify three mental spaces: object features/general similarity, affective evaluation, and color. In an fMRI study with 80 participants, object-feature ratings correlated with representational structure in visual and prefrontal cortices, and affective ratings unexpectedly also correlated with visual cortex patterns. Visual cortices showed higher noise ceilings and more consistent behavioural alignment than associative regions, and AI models that performed well on specific properties correlated with the behavioural and fMRI RSA matrices. The authors conclude that similarity is multidimensional, with neural correspondence depending on content, regional variability and modelling method.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:ctgdw_v1",
+   "title": "Orthographic retrieval unfolds in parallel with single-word production",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/ctgdw_v1/",
+   "date": "2026-10-07",
+   "score": 9,
+   "topics": [
+    "language"
+   ],
+   "summary": "Four picture-word interference experiments (Ns = 60, 72, 96, 93) had participants type or speak picture names while ignoring non-word distractors that either matched the target's spelling pattern or offered a phonologically plausible alternative spelling. Mixture-model analyses showed that spelling-mismatch distractors sometimes sped onset but increased the probability of long-duration responses later in time and within typed words, and these late effects were absent for spoken responses. The results challenge the assumption that spelling is fully retrieved before written output begins, suggesting orthographic retrieval remains susceptible to phonological alternatives during writing.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:f3xpz_v2",
+   "title": "When attention turns inward: Mind wandering reduces perceptual sensitivity across visual fields",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/f3xpz_v2/",
+   "date": "2026-10-07",
+   "score": 9,
+   "topics": [
+    "attention",
+    "vision",
+    "metacognition"
+   ],
+   "summary": "In a preregistered online signal detection task, participants periodically reported whether they were mind wandering or on task while detecting stimuli in the left and right visual fields. Perceptual sensitivity (d′) was lower on mind-wandering trials, consistent with perceptual decoupling, but the reduction did not differ between visual fields. This suggests decoupling reflects a global attenuation of sensory processing rather than a lateralised one, and that the attentional systems involved may differ from those underlying slower fluctuations such as alertness.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:5k7vz_v1",
+   "title": "First Frequency, then Transitional Probability: Insights from primate statistical learning",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/5k7vz_v1/",
+   "date": "2026-10-07",
+   "score": 9,
+   "topics": [
+    "learning",
+    "language",
+    "models"
+   ],
+   "summary": "Guinea baboons performed a serial reaction time task designed to dissociate the frequency of local sequences from transitional probability (TP), yielding trial-by-trial learning data without the possible use of verbalised rules. Learning was driven mainly by frequency during the first 2,000 trials, with the usual dominance of TP emerging only later. The findings challenge the view that TP is the primary cue in statistical learning and constrain computational models of sequence learning.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:yc9jw_v2",
+   "title": "Non-commitment in mental imagery is distinct from perceptual inattention, and supports hierarchical scene construction",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/yc9jw_v2/",
+   "date": "2026-10-06",
+   "score": 9,
+   "topics": [
+    "vision",
+    "memory"
+   ],
+   "summary": "Across three experiments (N = 3,895 total), the authors asked whether missing details in mental imagery reflect genuine non-commitment or the same failures to notice, encode or recall that affect perception. Properties left out of imagined scenes did not correlate with those missed in briefly presented real images, and imagery unfolded hierarchically over time: core entities and spatial relations first, then physical properties, then surface details such as color and texture. Attempts to interrupt or constrain construction did not change this order. The authors interpret the results as supporting a hierarchical partial-scene construction account.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:9jpdz_v3",
+   "title": "Event segmentation aligns emotional learning and episodic memory",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/9jpdz_v3/",
+   "date": "2026-10-06",
+   "score": 9,
+   "topics": [
+    "memory",
+    "learning",
+    "emotion"
+   ],
+   "summary": "In a preregistered two-day Pavlovian category-conditioning study, category-shock associations reversed across learning phases, with one group receiving an explicit event boundary before each reversal and the other experiencing continuous reversals. At 24 hours, the segmentation group showed selectively enhanced recognition memory for threat-predictive items, whereas the continuous group showed flatter, less selective memory. Learning dynamics during encoding predicted later selective memory, with segmentation shifting this coupling toward the most recent reversal. The results suggest event boundaries help align episodic memory with currently relevant emotional significance.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:d6e2w_v1",
+   "title": "Charting the ontogeny of mnemonic processes in childhood: the COMIC dataset",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/d6e2w_v1/",
+   "date": "2026-10-06",
+   "score": 9,
+   "topics": [
+    "memory",
+    "development",
+    "methods"
+   ],
+   "summary": "This data paper presents the COMIC dataset from 180 children aged 4–8 years who completed four memory tasks indexing pattern categorization, pattern separation and pattern completion, plus three standardized intelligence subtests. It also describes a semi-automated data-cleaning pipeline for developmental behavioural data that can serve as a template for handling common data-quality problems in studies with young children. The resource is intended to support research on how generalization and memory specificity develop in early and middle childhood.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:mydre_v1",
+   "title": "Two sides of the same coin in memory: Speech and its accompanying gesture are remembered together",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/mydre_v1/",
+   "date": "2026-10-06",
+   "score": 9,
+   "topics": [
+    "memory",
+    "language"
+   ],
+   "summary": "In two experiments (N = 20 and N = 43), participants watched an actor speak sentences with related, unrelated or no gestures, then recognized the sentences and judged whether a gesture had been present or related. Recognition was better after related than unrelated gestures but not better than after no gesture. Gesture judgments were above chance and more accurate for confidently recognized sentences, for which participants also tended to report non-matching gestures as matching. The authors conclude that gesture memory is partly retrieved with the sentence and partly inferred from it, indicating close coupling between speech and gesture memory.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:5m3xs_v1",
+   "title": "Unsupervised transfer in relational category learning",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/5m3xs_v1/",
+   "date": "2026-10-05",
+   "score": 9,
+   "topics": [
+    "learning"
+   ],
+   "summary": "Participants learned to categorise stimuli by monotonic versus non-monotonic relations among line lengths, via classification or inference learning, and were then tested without feedback on luminance-based dot arrays and digit sequences. Inference learning produced stronger relational responding in training and better far transfer overall, with higher accuracy for digits than dots, especially among strong relational learners. Completing the digit task first selectively improved later transfer to the dots, which the authors suggest may reflect symbolic representations scaffolding relational alignment. The results indicate inference learning promotes abstract relational representations, with representational format and task order also shaping transfer.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:5pztq_v1",
+   "title": "Decision as navigation",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/5pztq_v1/",
+   "date": "2026-10-05",
+   "score": 9,
+   "topics": [
+    "decision",
+    "neuro"
+   ],
+   "summary": "This review argues that when decisions require inferring or reusing relations between options, decision-relevant attributes may be assembled into a cognitive map in which options are locations in a metric space and choice resembles navigation. Such a representation could allow the brain to compute vector-like relations between options and reuse them across problems to support value comparison. By linking neuroeconomics with spatial navigation research, the framework offers testable predictions about how structured knowledge is organised and used for choice.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:mgq9r_v6",
+   "title": "Echoes of Thought: Task Complexity, Inner Speech Analogs, and Prompt Design Shape LLMs' Response",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/mgq9r_v6/",
+   "date": "2026-10-05",
+   "score": 9,
+   "topics": [
+    "ai",
+    "decision",
+    "learning"
+   ],
+   "summary": "Using the two-step task from the model-free/model-based reinforcement learning literature, the authors ran nine simulation studies varying task complexity and prompt design in GPT-3.5 and four open-weight LLMs. GPT-3.5 showed model-based signatures in simplified task settings, lost them in de-simplified versions, and regained them with a prompt analogous to inner speech that required reflecting on past trials and anticipating future consequences. The open-weight models showed diminished model-based signatures under both de-simplified and facilitative conditions. The findings point to a role for structured reflective and anticipatory language in complex LLM behaviour, with similarities to and differences from human decision-making.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:nhef6_v2",
+   "title": "Attention in model-based cognitive neuroscience: Mechanisms for optimization under constraint",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/nhef6_v2/",
+   "date": "2026-10-05",
+   "score": 9,
+   "topics": [
+    "attention",
+    "models",
+    "neuro"
+   ],
+   "summary": "This review organises the algorithms proposed to implement or give rise to \"attention\" in model-based cognitive neuroscience by function, across perception, decision-making and learning. It grounds each formalised process in the performance objectives it serves and the processing constraints that limit it. The aim is to address the vagueness of verbal theories while avoiding the conflation of similar-looking mechanisms that may not share a neural basis, giving a road map of computational-level solutions attributed to attention.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:d3c9t_v3",
+   "title": "Memory precision fluctuates with theta rhythmicity in humans",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/d3c9t_v3/",
+   "date": "2026-10-05",
+   "score": 9,
+   "topics": [
+    "memory",
+    "neuro",
+    "attention"
+   ],
+   "summary": "Using a dense behavioural sampling approach, with an attention-grabbing cue expected to reset theta phase and varying delays before the to-be-remembered stimulus, the authors examined whether memory fluctuates rhythmically. Experiment 1 replicated the finding that associative memory performance fluctuates with theta rhythmicity, with a best-fitting frequency of 8 Hz. Experiment 2 found that memory precision also fluctuates at theta rhythm, as predicted by hippocampal models with oscillating engagement of alternative processing pathways. The work suggests such fast fluctuations can be studied noninvasively and behaviourally in humans.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:np2vd_v3",
+   "title": "Control Dilemmas Exist on Different Levels of Information Processing: Flexibility and Stability Trade off at the Task Level",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/np2vd_v3/",
+   "date": "2026-10-05",
+   "score": 9,
+   "topics": [
+    "control",
+    "attention"
+   ],
+   "summary": "The authors proposed that a flexibility–stability trade-off may exist only within the same level of information processing, and tested this with a new paradigm in which participants switched between categorization tasks amid within-task or between-task distractors at the task level (Experiments 1–2) or the stimulus level (Experiment 3). Between-task distractors interfered less than within-task distractors at the task level, indicating shielding, but both interfered equally at the stimulus level, consistent with shielding being bypassed by automatic retrieval of learned stimulus-response associations. Across experiments, shielding on the previous trial improved performance on task repeats but impaired it on task switches, supporting a trade-off between stability and flexibility at the task level.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:gfmzc_v2",
+   "title": "Morphological analysis when morphemes are hard to detect: evidence from infixation and reduplication",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/gfmzc_v2/",
+   "date": "2026-10-05",
+   "score": 9,
+   "topics": [
+    "language"
+   ],
+   "summary": "Using the morpheme interference paradigm in Tagalog, the authors tested whether infixes (e.g., t-in-awag) and reduplicants (e.g., tatawag) are detected during prelexical processing, since these morphemes lack a consistent surface form. Nonwords with morphological structure produced lower accuracy and longer RTs than nonwords without, indicating that skilled readers are sensitive to these structures. This extends evidence for morphological analysis beyond English suffixation and bears on theories of morpheme learning.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:qy6pc_v1",
+   "title": "Retro-cue Characteristics and Visual Masking Differentially Influence Voluntary and Involuntary Attention",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/qy6pc_v1/",
+   "date": "2026-10-05",
+   "score": 9,
+   "topics": [
+    "attention",
+    "memory"
+   ],
+   "summary": "Across four experiments (n=140), the study manipulated retro-cue reliability and late visual masking with peripheral and central retro-cues, and analysed RTs and accuracy with hierarchical drift-diffusion models. Voluntary and involuntary retrospective attention did not differ in how they affected competing perceptual and semantic working memory content. Cue type, reliability and masking did influence voluntary and involuntary selection in other ways, for example masking altered involuntary benefits in opposite directions across representational quality and retrieval processes for peripheral cues.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:6t9qg_v3",
+   "title": "Isolating domain-specific and domain-general contributions to global confidence",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/6t9qg_v3/",
+   "date": "2026-10-05",
+   "score": 9,
+   "topics": [
+    "metacognition",
+    "memory",
+    "vision"
+   ],
+   "summary": "Using a gamified approach, the authors compared how global confidence, i.e. evaluation of performance over longer spans, is formed in memory versus perception. In memory, both local accuracy and local confidence contributed to global confidence, whereas in perception only local confidence predicted it. The results suggest that global confidence formation differs across cognitive domains, which is relevant to metacognitive interventions in education and psychiatry.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:2e58a_v4",
+   "title": "Biased processing of multiple outcomes in human reinforcement learning: evidence from computational modeling and eye-tracking",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/2e58a_v4/",
+   "date": "2026-10-05",
+   "score": 9,
+   "topics": [
+    "learning",
+    "decision",
+    "attention"
+   ],
+   "summary": "The authors designed a reinforcement learning task in which each choice yielded two outcomes from the same distribution, only one of which counted toward payoff, and combined behaviour, computational modelling and eye-tracking. Both outcomes influenced learning, but integration was biased toward rewards over punishments, and gaze was modulated by outcome valence and relevance. A second experiment with complete feedback confirmed the main results, suggesting that losses tend to be neglected relative to gains when multiple outcomes are delivered.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:356xd_v4",
+   "title": "Learning to Enumerate Reorganizes Magnitude Representations",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/356xd_v4/",
+   "date": "2026-10-04",
+   "score": 9,
+   "topics": [
+    "ai",
+    "development",
+    "models"
+   ],
+   "summary": "The authors trained ResNeXt-50 networks to enumerate dots and linearly decoded number versus cumulative area from penultimate-layer features. Untrained networks showed an area bias, whereas enumeration training reversed it within one epoch by suppressing area information, an effect not mirrored by a control network trained on area. This is a computational proof of concept that learning to enumerate can reorganise magnitude representations, suggesting the adult number bias may partly follow from symbolic number acquisition.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:qvwdy_v6",
+   "title": "The Not So Illusory Truth Effect: Source Credibility and the Effect of Repetition on Belief",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/qvwdy_v6/",
+   "date": "2026-10-04",
+   "score": 9,
+   "topics": [
+    "decision",
+    "memory",
+    "models"
+   ],
+   "summary": "The authors present a formal model arguing that the illusory truth effect can be rational when sources are usually truthful, and which predicts little repetition effect for non-credible sources. In a preregistered experiment (N = 4,947) the effect was substantially smaller in a mostly false than a mostly true newsfeed, and in a second (N = 2,484) repetition raised partisans' belief only for claims from the 2024 U.S. presidential candidate they trusted. Repeated misinformation may therefore be most persuasive when it comes from trusted sources.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.1016/j.cognition.2026.106729",
+   "title": "When “they” is singular: The interplay between cognitive and social factors predicts pronoun misinterpretations in bilingual English speakers",
+   "authors": "Manuel F. Pulido, Stanislav Mulík, Paola E. Dussias",
+   "venue": "Cognition",
+   "url": "https://doi.org/10.1016/j.cognition.2026.106729",
+   "date": "2026-10-6",
+   "score": 8,
+   "topics": [
+    "language",
+    "social",
+    "control"
+   ],
+   "summary": "Using self-paced reading, the study examined processing of non-binary singular 'they' in unambiguous and temporarily ambiguous contexts among second-language English speakers from Spain. Seemingly chance-level group performance reflected bimodal distributions of interpretation, with misinterpretations predicted by combined sociodemographic and cognitive factors, and even participants willing to adopt non-binary language depended on cognitive resources for accurate interpretation. The authors use these findings to propose a conceptual model of adaptation to grammatical change, termed IMAGINE.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.1016/j.cognition.2026.106732",
+   "title": "Flexibility of hierarchical reasoning across age and species",
+   "authors": "Abhishek M. Dedhe, Stephen Ferrigno, Diana A. Liao et al.",
+   "venue": "Cognition",
+   "url": "https://doi.org/10.1016/j.cognition.2026.106732",
+   "date": "2026-10-6",
+   "score": 8,
+   "topics": [
+    "decision",
+    "development"
+   ],
+   "summary": "Using Bayesian modelling of previously published and new data from US adults, Tsimane adults, 3-to-6-year-old children, rhesus monkeys and carrion crows, the study tested hierarchical reasoning across task complexities and stimulus domains. Evidence for hierarchical reasoning appeared across ages and species, with substantial individual and population variation; adults relied on it most consistently, while children and non-humans showed graded performance depending on complexity and stimulus type. The authors conclude that hierarchical reasoning is a flexible, not all-or-none, ability that may not be uniquely human.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.1016/j.tics.2026.09.003",
+   "title": "Time after time: neural codes of speech comprehension",
+   "authors": "Laura Gwilliams",
+   "venue": "Trends in Cognitive Sciences",
+   "url": "https://doi.org/10.1016/j.tics.2026.09.003",
+   "date": "2026-10-5",
+   "score": 8,
+   "topics": [
+    "language",
+    "neuro"
+   ],
+   "summary": "This review argues that the brain converts the transient speech signal into neural representations that are persistent, parallel and time-stamped. It covers evidence for persistence of information after it leaves the acoustic input, parallel encoding of recent inputs across levels of linguistic structure, and dynamic codes representing both content and elapsed time to preserve order. Together these properties are proposed to explain how a vanishing signal yields temporally extended linguistic structure.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.1016/j.visres.2026.108916",
+   "title": "Task-dependent inflation of rapid motion priming effects due to task and response constraints",
+   "authors": "Kimberley Dundas, Mary A. Peterson, Joseph L. Brooks",
+   "venue": "Vision Research",
+   "url": "https://doi.org/10.1016/j.visres.2026.108916",
+   "date": "2026-10-5",
+   "score": 8,
+   "topics": [
+    "vision",
+    "methods"
+   ],
+   "summary": "Across two experiments, the authors tested whether visual motion priming estimates from tasks requiring individuated perception of two briefly presented stimuli (e.g., same-different judgements) are inflated at very short durations and ISIs. At the shortest timings observers were at chance discriminating the prime's direction and often reported seeing only one stimulus, suggesting responses driven by task demands; tasks not requiring explicit discrimination still showed priming but with substantially smaller magnitude. The authors recommend paradigms that minimise such task-related biases.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.1016/j.cortex.2026.09.018",
+   "title": "Stage-specific contributions of dorsal and ventral premotor cortices to the acquisition of arbitrary visuomotor associations",
+   "authors": "Sonia Turrini, Anastasia Amadori, Giorgio Arcara et al.",
+   "venue": "Cortex",
+   "url": "https://doi.org/10.1016/j.cortex.2026.09.018",
+   "date": "2026-10-5",
+   "score": 8,
+   "topics": [
+    "learning",
+    "neuro"
+   ],
+   "summary": "In 19 healthy adults, cTBS was applied to PMd, PMv or a V1 control before learning arbitrary visuomotor mappings, with a 24-hour recall test and state-space and Rescorla-Wagner modelling. Disrupting either PMd or PMv slowed early acquisition similarly, but only PMd disruption impaired next-day recall, which then depended on sleep quality and was decoupled from learning-day performance. The results indicate a stage-specific dissociation, with both regions supporting early learning and only PMd supporting stabilisation.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.3758/s13423-026-03019-x",
+   "title": "Leveraging word knowledge from everyday language",
+   "authors": "Layla Unger, Emma James",
+   "venue": "Psychonomic Bulletin & Review",
+   "url": "https://doi.org/10.3758/s13423-026-03019-x",
+   "date": "2026-10-8",
+   "score": 8,
+   "topics": [
+    "learning",
+    "language",
+    "models"
+   ],
+   "summary": "The authors quantified contextual cues in children's everyday English language input, based on the idea that words with similar meanings occur in similar contexts, as exploited by large language models. These context cues reliably predicted real-world word learning beyond other established predictors. The findings suggest that everyday language context helps scaffold children's vocabulary acquisition.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.3758/s13423-026-03015-1",
+   "title": "Why are pictures remembered better than sounds? The roles of subjective vividness of mental imagery and semantic labels",
+   "authors": "F. N. Ahmad, S. Tremblay, M. Alvi et al.",
+   "venue": "Psychonomic Bulletin & Review",
+   "url": "https://doi.org/10.3758/s13423-026-03015-1",
+   "date": "2026-10-5",
+   "score": 8,
+   "topics": [
+    "memory",
+    "vision"
+   ],
+   "summary": "Across experiments, participants generated a mental image from a written label and rated its vividness before an old/new recognition judgement for pictures or environmental sounds. Pictures showed higher vividness and recognition than sounds; written labels raised vividness and target recognition for sounds and eliminated modality differences for targets, but pictures retained an advantage in lure discrimination. Vividness predicted correct target recognition for pictures but also increased false recognition of lures for sounds, suggesting the picture advantage for lures reflects stronger item-specific retrieval information.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.3758/s13423-026-03018-y",
+   "title": "A match made in mental space: Alignment between target skew and cue organization influences recall of attribute values",
+   "authors": "Patrik Sörqvist, Emil Skog, Alice Mason et al.",
+   "venue": "Psychonomic Bulletin & Review",
+   "url": "https://doi.org/10.3758/s13423-026-03018-y",
+   "date": "2026-10-5",
+   "score": 8,
+   "topics": [
+    "memory",
+    "decision"
+   ],
+   "summary": "The authors propose that retrieval cues, like targets, are organised by distinctiveness and that recall is best when cue and target distributions align. In a preregistered experiment using old (skewed) and new (more linear) EU energy-label scales as cues for recalling refrigerators' kWh values drawn from skewed or non-skewed distributions, the linear scale produced more accurate recall for non-skewed targets but overly linear recall for skewed targets. The skewed scale worked best when targets were positively skewed, indicating that cues impose distributional structure on reconstructed values.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.1111/cogs.70269",
+   "title": "Factors Influencing the Emergence of Dependency Length Minimization in Neural Agent Simulations",
+   "authors": "Yuqing Zhang, Tessa Verhoef, Gertjan van Noord et al.",
+   "venue": "Cognitive Science",
+   "url": "https://doi.org/10.1111/cogs.70269",
+   "date": "2026-10-7",
+   "score": 8,
+   "topics": [
+    "language",
+    "models",
+    "ai"
+   ],
+   "summary": "Using a framework in which recurrent neural network agents learn and communicate in artificial languages, the study examined how listening noise, limited speaker capacity and incremental processing affect the emergence of dependency length minimization. Results showed a complex interplay: agents regularised toward one dominant order in the full meaning space, showed a short-before-long preference aligned with DLM only in verb-initial languages in the half meaning space, and showed a consistent DLM preference only under incremental processing pressure. This suggests processing limitations may shape DLM, while highlighting the difficulty of modelling human-like biases in emergent communication.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.1111/cogs.70270",
+   "title": "More Evidence for the Standard Account of Theory of Mind Development: A Reply to Fabricius (2026)",
+   "authors": "Hannes Rakoczy, Lydia Schidelko",
+   "venue": "Cognitive Science",
+   "url": "https://doi.org/10.1111/cogs.70270",
+   "date": "2026-10-7",
+   "score": 8,
+   "topics": [
+    "development",
+    "social"
+   ],
+   "summary": "This is a reply to Fabricius, who argued that the authors' earlier results support a competence-limitation account in which children lack proper mental state concepts until about age 6–7. The authors argue that their original findings are incompatible with that account. They say the findings fit the standard picture, in which children acquire mental state concepts by age 4 and performance factors sometimes mask this competence.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.1167/jov.26.10.10",
+   "title": "Perception of visual noise patterns depends on correlations produced in V1: A simulation study",
+   "authors": "Shaozhi Nie, Samantha A. Montoya, Michael-Paul Schallmo et al.",
+   "venue": "Journal of Vision",
+   "url": "https://doi.org/10.1167/jov.26.10.10",
+   "date": "2026-10-9",
+   "score": 8,
+   "topics": [
+    "vision",
+    "models"
+   ],
+   "summary": "Using the biologically inspired VOneNet model of V1, the authors simulated responses to visual noise and analyzed single-unit responses and correlations among model neurons. Spatially independent noise still produced population correlations, and decorrelating the simulated activity substantially degraded reconstruction of the noise pattern, with simple-cell correlations contributing most. The authors conclude that noise perception depends on population-level correlations in V1 and discuss implications for visual snow syndrome.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.1167/jov.26.10.9",
+   "title": "Ocularity modulates the dominance of spatial over temporal influences in binocular rivalry",
+   "authors": "Lisa Beckmann, Thomas Schenk, Karin Ludwig",
+   "venue": "Journal of Vision",
+   "url": "https://doi.org/10.1167/jov.26.10.9",
+   "date": "2026-10-9",
+   "score": 8,
+   "topics": [
+    "vision",
+    "attention"
+   ],
+   "summary": "The study examined how spatial context (surround inhibition) and temporal context (flash suppression) combine in binocular rivalry, manipulating their strengths by varying which eye received the prime, surround, and center stimuli. When both influences biased perception in the same direction they were mostly additive, and some combinations allowed near-perfect prediction of the dominant percept. When they conflicted, spatial context generally dominated, except when both were presented interocularly, where temporal context had the edge. The authors attribute this to flash suppression being weakened less by interocular presentation than surround inhibition, suggesting different hierarchical processing levels.",
+   "highlight": false
+  },
+  {
+   "id": "doi:10.1162/jocn.a.2729",
+   "title": "The Precision Hierarchy Hypothesis: A Unifying Framework to Explain Opposing Serial Effects",
+   "authors": "Carina Ufer, Helen Blank",
+   "venue": "Journal of Cognitive Neuroscience",
+   "url": "https://doi.org/10.1162/jocn.a.2729",
+   "date": "2026-10-6",
+   "score": 8,
+   "topics": [
+    "vision",
+    "models"
+   ],
+   "summary": "This theoretical paper proposes the \"precision hierarchy hypothesis\" to reconcile attractive and repulsive serial dependence effects. Within a predictive processing framework, it holds that highly precise priors at lower sensory levels yield repulsive effects, while lower-precision priors at higher, more abstract levels yield attractive biases, with prior precision adjusting to environmental correlations. The authors say the framework unifies diverse findings and offers testable predictions.",
+   "highlight": false
+  },
+  {
+   "id": "arxiv:2610.09928",
+   "title": "Do Generative Priors Align with Human Naturalness Perception?",
+   "authors": "Taiki Fukiage",
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.09928",
+   "date": "2026-10-07",
+   "score": 8,
+   "topics": [
+    "ai",
+    "vision"
+   ],
+   "summary": "The authors probed the native prediction errors of 25 image and video generative models using content-preserving interventions that disrupt facial configuration or physical illumination consistency. Loss differences reproduced the Thatcher effect and shape-dependent responses to illumination inconsistencies, tracked graded human naturalness judgments (up to r = .84 for faces and .64 for physical scenes), and retained human-aligned signal after controlling for vision-encoder feature distances and image quality metrics. Alignment with humans peaked earlier along denoising schedules than sensitivity did, suggesting that human-like naturalness judgments dissociate from generic violation detection.",
+   "highlight": false
+  },
+  {
+   "id": "arxiv:2610.12022",
+   "title": "Examining Social Attribution in LLM Reasoning: A Theory-Guided Probing Methodology",
+   "authors": "Zhaoxin Yu, Qingchao Kong, Dajun Zeng et al.",
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.12022",
+   "date": "2026-10-08",
+   "score": 8,
+   "topics": [
+    "social",
+    "ai"
+   ],
+   "summary": "The paper builds a benchmark of 7,639 responsibility and blame judgment questions, drawn from classic Attribution Theory vignettes and real-world narratives, and evaluates 32 LLMs and 5 non-LLM baselines. It also uses probing to examine how five attribution dimensions are represented in hidden states. LLMs showed measurable but incomplete agreement with human judgments, which increased with model size. Some attribution dimensions were decodable from particular hidden-state positions, and their influence on judgments was consistent with Attribution Theory.",
+   "highlight": false
+  },
+  {
+   "id": "arxiv:2610.10049",
+   "title": "The Long Road to the Same Answer: Cognitive Bias Under Escalating Reasoning Budgets in Large Language Models",
+   "authors": "Obada Kraishan",
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.10049",
+   "date": "2026-10-07",
+   "score": 8,
+   "topics": [
+    "ai",
+    "decision"
+   ],
+   "summary": "The study tested whether longer reasoning reduces cognitive biases in LLMs, using 30 vignettes across six biases, four model families with reasoning and non-reasoning siblings, and four thinking-token ceilings (12,350 API calls). Reasoning models were not reliably less biased than their siblings, and bias did not reliably decline with more realized reasoning tokens. Only anchoring went in the human direction (d = 1.89), while most other biases leaned the opposite way. A one-line instruction to restate the anchor lowered anchoring on all five items but did not reach significance (p = .057). The authors argue against treating test-time reasoning as a guarantee of rationality.",
+   "highlight": false
+  },
+  {
+   "id": "arxiv:2610.07791",
+   "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+   "authors": "Peihua Mai, Zhuoyan Shao, Xinbao Qiao et al.",
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.07791",
+   "date": "2026-10-06",
+   "score": 8,
+   "topics": [
+    "ai",
+    "decision"
+   ],
+   "summary": "The paper adapts classic psychological paradigms to three tasks to study illusory pattern perception in LLMs, comparing them directly with human behavior. LLMs often showed stronger illusory pattern perception than humans, such as over-associating frequent positive attributes with majority groups or large organizations and building causal narratives from ambiguous events. A Sparse Autoencoder-based interpretability analysis linked holistic frequency perception and analytic cognitive orientation to these illusions, suggesting a threat to the reliability of LLM reasoning.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:4k65w_v1",
+   "title": "Familiar Content Changes Performance and Processing in Matrix Reasoning in Early Adolescence",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/4k65w_v1/",
+   "date": "2026-10-10",
+   "score": 8,
+   "topics": [
+    "development",
+    "vision"
+   ],
+   "summary": "In a within-participants study of 56 Brazilian children and adolescents aged 11–15, accuracy and gaze patterns were compared on six abstract and six contextual 3×3 matrix-reasoning items requiring corresponding rules. Contextual items were answered more accurately (2.44 times higher odds of a correct response), while completion time, fixation count, and fixation duration were similar. Clustering of gaze transitions found two patterns, and contextual items were less likely to show the localized pattern. Broader exploration was linked to higher accuracy only for abstract items. These exploratory findings suggest abstract and familiar items are not interchangeable.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:fkd4v_v2",
+   "title": "Breaking Common Ground through Reciprocal Misalignment",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/fkd4v_v2/",
+   "date": "2026-10-10",
+   "score": 8,
+   "topics": [
+    "language",
+    "social"
+   ],
+   "summary": "Four experiments used a multiplayer word association task with human or simulated partners who varied in semantic typicality, to test whether interaction inherently leads to semantic alignment. In general, social interaction led people to produce more conventional associations, but with an atypical or hard-to-align partner they reduced their own typicality and matching, sacrificing alignment even when incentivized to align. The authors interpret this \"reciprocal misalignment\" as possibly reflecting socially motivated differentiation rather than only coordination failure.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:2kdtf_v2",
+   "title": "Selective maintenance of aversive memories as a mechanism of spontaneous recovery of fear",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/2kdtf_v2/",
+   "date": "2026-10-10",
+   "score": 8,
+   "topics": [
+    "memory",
+    "learning",
+    "emotion"
+   ],
+   "summary": "The authors fit computational models of a new theory, selective maintenance of aversive memories, to fear conditioning and extinction behavior (N=316), and found they captured spontaneous recovery and outperformed alternative theory-based models. Results held in a preregistered replication (N=355) and a symptomatic sample (N=520), where generalized anxiety symptoms correlated with the model's overgeneralization estimates. Simulations suggested that retrieval cues and cognitive interventions could prevent the return of fear, pointing to selective memory maintenance as a target for anxiety treatment.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:bfsgr_v4",
+   "title": "Neural Racing Accumulator Model Estimation With Lightweight Monotonic Flows",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/bfsgr_v4/",
+   "date": "2026-10-09",
+   "score": 8,
+   "topics": [
+    "models",
+    "decision"
+   ],
+   "summary": "The paper proposes a method for estimating parameters of race models of decision-making with intractable densities, by training a small neural network with a monotonic neural spline flow to learn each runner's probability and cumulative density functions. This yields efficient likelihoods usable with modern samplers and decouples training from the choice of prior or parameterization. The authors demonstrate it on tractable and intractable versions of the racing diffusion model and argue that lightweight neural density estimators are advantageous when such flexibility is needed.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:5ygkj_v3",
+   "title": "fMRI hyperscanning reveals widespread neural coupling during natural conversations",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/5ygkj_v3/",
+   "date": "2026-10-09",
+   "score": 8,
+   "topics": [
+    "neuro",
+    "social",
+    "language"
+   ],
+   "summary": "Dyads were scanned simultaneously with fMRI during free-flowing conversation and during a control in which they read aloud another dyad's scripted dialogue, preserving turn-taking but removing co-construction. Natural conversation produced widespread intersubject neural alignment across regions tied to attention, audition, affect, executive control, and social cognition. Speakers and listeners also anticipated each other within a short window, with activity in the same systems preceding the partner's. The findings suggest live, co-constructed conversation aligns brains beyond passive or scripted communication.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:dhe3j_v2",
+   "title": "Do bilinguals avoid ambiguity or minimise processing effort? Insights from an online eye-tracking study in spoken Mandarin",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/dhe3j_v2/",
+   "date": "2026-10-08",
+   "score": 8,
+   "topics": [
+    "language",
+    "control"
+   ],
+   "summary": "Two spoken Mandarin experiments, a picture naming task and a version with online WebGazer eye-tracking, tested whether bilinguals avoid ambiguity generally or only when doing so reduces cognitive load. Contrary to the general ambiguity-avoidance hypothesis, Mandarin-English bilinguals in the UK used ambiguous expressions more often than more-monolingual speakers in China. Bilinguals directed early attention to image pairs with more accessible labels, while more-monolinguals monitored ambiguity depending on their responses. The authors interpret this as support for effort minimisation and as relevant to bilingual lexical access and early lexical attrition.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:n2sfm_v1",
+   "title": "srifm: Role of lexical information for perceptual learning",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/n2sfm_v1/",
+   "date": "2026-10-08",
+   "score": 8,
+   "topics": [
+    "language",
+    "learning"
+   ],
+   "summary": "The abstract describes using perceptual learning to test predictions of lexical feedback models such as TRACE against autonomous models such as Shortlist and Merge. It notes that listeners rapidly learn novel pronunciations of phonemic categories after about 10 ambiguous instances in unambiguous words. The abstract is cut off before any methods or results are given, so the findings are not reported.",
+   "highlight": false
+  }
+ ]
+}

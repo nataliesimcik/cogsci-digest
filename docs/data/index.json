@@ -1,0 +1,69 @@
+{
+ "title": "Cognitive Science Weekly",
+ "repo_url": "https://github.com/nataliesimcik/cogsci-digest",
+ "topics": [
+  {
+   "key": "memory",
+   "label": "Memory"
+  },
+  {
+   "key": "attention",
+   "label": "Attention"
+  },
+  {
+   "key": "vision",
+   "label": "Vision & perception"
+  },
+  {
+   "key": "language",
+   "label": "Language"
+  },
+  {
+   "key": "decision",
+   "label": "Reasoning & decisions"
+  },
+  {
+   "key": "learning",
+   "label": "Learning"
+  },
+  {
+   "key": "control",
+   "label": "Cognitive control"
+  },
+  {
+   "key": "development",
+   "label": "Development & aging"
+  },
+  {
+   "key": "social",
+   "label": "Social cognition"
+  },
+  {
+   "key": "emotion",
+   "label": "Emotion & motivation"
+  },
+  {
+   "key": "metacognition",
+   "label": "Metacognition"
+  },
+  {
+   "key": "models",
+   "label": "Computational models"
+  },
+  {
+   "key": "ai",
+   "label": "AI & cognition"
+  },
+  {
+   "key": "neuro",
+   "label": "Cognitive neuroscience"
+  },
+  {
+   "key": "methods",
+   "label": "Methods & replication"
+  }
+ ],
+ "weeks": [
+  "2026-10-11"
+ ]
+}
