@@ -1,0 +1,210 @@
+{
+ "week": "2026-10-12",
+ "since": "2026-10-05",
+ "until": "2026-10-12",
+ "fetched": 39,
+ "overview": "This week's papers share a concern with what a result licenses us to conclude. The ATHENA work argues that one set of stored traces can support both specific and general memory depending on how strongly retrieval is made to compete, which would remove the need for separate systems or traces. Two other papers press on inference from model behavior: the language-model study shows that cross-linguistic differences on scales without reverse-keyed items cannot separate a latent trait from response bias, and the flyvis stress test finds that several behavioral effects also appear in task-matched CNNs, so claims must be scoped to the model family, intervention, and trained solution. The conceptual paper on interpretability asks a related question from the other direction, proposing that machine constructs recurring across differently built models be treated as hypotheses for linguistics, to be tested by domain experts.\n\nOn the empirical side, the scalar implicature study with 538 participants found no clear support for the Polarity Hypothesis. Its meta-analysis gave only a small pooled effect in the predicted direction, with strong variation across scales and studies. Among the more concrete results, Hebrew-learning toddlers named objects right-to-left while English- and Spanish-learning toddlers showed the opposite pattern, before any literacy instruction. An EEG study reported that 40 Hz entrainment to non-speech rhythms predicted dyslexia with high balanced accuracy, though the sample was only 48 participants. A paper on near-random behavior in strategic games was also in the set, but no abstract was available, so we cannot say anything about its findings here.",
+ "papers": [
+  {
+   "id": "psyarxiv:rsq7g_v1",
+   "title": "The Same Memory Retrieved Differently: Competition Enables Flexible Generalization in Hippocampus-like Networks",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/rsq7g_v1/",
+   "date": "2026-10-11",
+   "score": 9,
+   "topics": [
+    "memory",
+    "models"
+   ],
+   "summary": "The authors introduce ATHENA, a framework that treats cognitive episodic memory models as single-step approximations of recurrent networks with competitive retrieval, similar to Modern Hopfield Networks. In simulations, changing the intensity of the competition at retrieval, a parameter with a psychological interpretation, made the same stored traces yield qualitatively different forms of generalization, and the account is extended to sequential memory using known hippocampal circuits. This suggests that specific and general memory content need not require separate systems or traces.",
+   "highlight": true
+  },
+  {
+   "id": "psyarxiv:5x6zj_v1",
+   "title": "Interpretability in the Limit: How Can Understanding Machines Help us Understand Human Language?",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/5x6zj_v1/",
+   "date": "2026-10-11",
+   "score": 9,
+   "topics": [
+    "ai",
+    "language",
+    "models"
+   ],
+   "summary": "This is a conceptual paper that asks how mechanisms uncovered by interpretability research in AI systems (\"machine constructs\") could inform linguistics and cognitive science, assuming interpretability succeeds as fully as can be hoped. It proposes axes for characterizing constructs (theoretical, domain, and ontological status, and complexity), argues for prioritizing constructs that recur across models differing in architecture, data, objective, language, and modality, and outlines three routes by which they can inform theory, treating them as hypotheses requiring domain-expert testing. It ends with recommendations that can be implemented now.",
+   "highlight": true
+  },
+  {
+   "id": "psyarxiv:5yzqx_v1",
+   "title": "The emergence of language-specific biases in visual attention in pre-reading toddlers from two cultures",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/5yzqx_v1/",
+   "date": "2026-10-11",
+   "score": 8,
+   "topics": [
+    "attention",
+    "language",
+    "development"
+   ],
+   "summary": "Toddlers aged 2.5-4 years who were exposed to different writing systems were tested in a picture naming task to see the direction in which they allocated attention across objects. Across two communities, Hebrew-learning children named objects right-to-left, while English- and Spanish-learning children showed the opposite pattern, and these tendencies strengthened with age. The results suggest that directional biases linked to a language's writing system appear before literacy instruction, pointing to early cultural influence on attention.",
+   "highlight": true
+  },
+  {
+   "id": "doi:10.1016/j.cognition.2026.106737",
+   "title": "Near-random behavior in strategic games",
+   "authors": "Tal Boger, Dorsa Amir, Sami R. Yousif",
+   "venue": "Cognition",
+   "url": "https://doi.org/10.1016/j.cognition.2026.106737",
+   "date": "2026-10-12",
+   "score": 7,
+   "topics": [
+    "decision",
+    "models"
+   ],
+   "summary": "No abstract is available; the title indicates a paper about behavior in strategic games that is close to random.",
+   "highlight": true
+  },
+  {
+   "id": "psyarxiv:25xwu_v8",
+   "title": "Polarity and the speed of scalar implicature processing",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/25xwu_v8/",
+   "date": "2026-10-11",
+   "score": 7,
+   "topics": [
+    "language",
+    "methods"
+   ],
+   "summary": "A sentence-picture verification experiment with 538 English speakers tested the Polarity Hypothesis, which predicts that scalar implicatures from positive terms (e.g., 'some') are slower than literal readings while those from negative terms (e.g., 'not all') are faster. The study found no clear evidence for the effect, which varied strongly across scales, and a meta-analysis of existing evidence gave a small pooled effect in the predicted direction with widely varying study estimates. The general implicature slowdown (B&N effect) was present in early trials but not later ones, so polarity may affect processing speed but not robustly across scales.",
+   "highlight": true
+  },
+  {
+   "id": "psyarxiv:8vhwz_v1",
+   "title": "Trait or Bias? Why item keying is indispensable when comparing language model responses across languages",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/8vhwz_v1/",
+   "date": "2026-10-11",
+   "score": 7,
+   "topics": [
+    "ai",
+    "methods",
+    "social"
+   ],
+   "summary": "Three social orientation scales were given to four US- and China-developed language models in Chinese and English at two temperature settings, and responses were decomposed with a psychometric model separating a latent trait from directional response bias. On balanced-keyed scales, Chinese prompting yielded higher trait and lower bias estimates, which offset each other on scales without reverse-keyed items, where they cannot be separated. The authors conclude that cross-linguistic differences on such scales do not show construct differences, and recommend balanced keying, item-level decomposition, and contemporaneous controls; they also report that item wording drives the difference and that model identifier stability over four weeks varies widely between vendors.",
+   "highlight": true
+  },
+  {
+   "id": "arxiv:2610.13419",
+   "title": "EEG Entrainment to Non-Speech Rhythmic Patterns Associated with Dimensions of Language Performance",
+   "authors": "Francisco J. Martínez-Murcia, Nicolás J. Gallego-Molina, Marco A. Formoso et al.",
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.13419",
+   "date": "2026-10-09",
+   "score": 6,
+   "topics": [
+    "language",
+    "neuro"
+   ],
+   "summary": "In 48 participants, the authors measured EEG responses to white noise amplitude-modulated at rates matching Spanish speech units and used phase-amplitude coupling to predict developmental dyslexia. Entrainment at 40 Hz predicted dyslexia with a balanced accuracy of 0.929 in the best case (p = 0.0069), and in controls, poorer phonemic awareness, reading comprehension, or rapid naming were associated with greater right-hemisphere 40 Hz entrainment. The authors interpret this as a phonemic entrainment deficit in dyslexia and as support for hemispheric compensation.",
+   "highlight": true
+  },
+  {
+   "id": "arxiv:2610.13018",
+   "title": "FlyHack: Stress-Testing Mechanistic Claims in a Connectome-Constrained Visual Model",
+   "authors": "Aashish Dhawan",
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.13018",
+   "date": "2026-10-09",
+   "score": 6,
+   "topics": [
+    "vision",
+    "models",
+    "methods"
+   ],
+   "summary": "The authors stress-test mechanistic conclusions from flyvis, a connectome-constrained Drosophila motion-vision model, using its 50-model ensemble, task-matched CNN controls, and replicated interventions. Behavioral effects such as reverse-phi reversal also appear in task-matched CNNs, flyvis's adversarial robustness advantage largely disappears against larger CNNs, attribution results depend on matching the method to the intervention, and circuit conclusions vary across ensemble members and representations. They conclude that such models make mechanistic hypotheses testable but that claims must be scoped to the model family, intervention, representation, and trained solution.",
+   "highlight": true
+  },
+  {
+   "id": "psyarxiv:fk3pd_v6",
+   "title": "Examining the Relations Between Self-Construal, Culture, and Cognitive Dissonance Using the Induced Compliance Paradigm",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/fk3pd_v6/",
+   "date": "2026-10-12",
+   "score": 6,
+   "topics": [
+    "social",
+    "methods"
+   ],
+   "summary": "This registered report re-analyzed a large international dataset (18 countries, N = 3,804) to test whether self-construal and culture moderate cognitive dissonance effects in the induced-compliance paradigm. Dissonance effects were not stronger for people with higher individual-level self-construal, in more individualistic countries, or in countries with higher country-level self-construal, so all three hypotheses were unsupported. The authors suggest that cultural moderation found with the free-choice paradigm may not generalize, and call for reassessing the procedure's reliability and the theoretical role of choice.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:w24eb_v2",
+   "title": "Ulyssean Self-Control: Pre-commitment is effective, but choosing it freely requires good self-control",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/w24eb_v2/",
+   "date": "2026-10-12",
+   "score": 6,
+   "topics": [
+    "decision",
+    "control"
+   ],
+   "summary": "Three studies (N ≈ 1,000 each) examined pre-commitment as a self-control strategy. Pre-commitment causally improved effort performance in Study 1, but in Study 2 participants with low trait self-control were 35 percentage points less likely to choose it and performed worse, while forced pre-commitment improved performance and information about effectiveness only slightly increased uptake. Study 3 found that high-trait-self-control participants were more likely to choose pre-commitment across domains, mediated by future focus, strategy familiarity, and temptation avoidance, so those who might benefit most are least likely to adopt it.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:z7624_v1",
+   "title": "Aging and Hearing Loss in Emotional Prosody Processing: Divergent Neural Adaptation and Behavioral Performance",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/z7624_v1/",
+   "date": "2026-10-12",
+   "score": 6,
+   "topics": [
+    "development",
+    "language",
+    "emotion"
+   ],
+   "summary": "Two experiments combined ERPs, time-frequency analyses, and behavioral measures to separate the contributions of aging and hearing sensitivity to emotional prosody processing. Aging was associated with reduced neural differentiation between emotions, lower behavioral efficiency, slower emotion identification, and enhanced P3a amplitude, whereas hearing sensitivity showed no main effect on accuracy or reaction time despite relating to delayed early neural responses and stronger theta and alpha activity. The authors propose an \"asymmetric adaptation\" account in which neural responses to degraded input reorganize selectively, which may explain why neural and behavioral outcomes diverge.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:kzsmp_v1",
+   "title": "Effects of a Web-Based Debiasing Intervention on Brazilian Psychologists’ Accuracy on Major Depressive Disorder Diagnostic Tasks: A Randomized Training Intervention",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/kzsmp_v1/",
+   "date": "2026-10-11",
+   "score": 6,
+   "topics": [
+    "decision",
+    "methods"
+   ],
+   "summary": "Brazilian psychologists (N = 535, 299 assessed post-intervention) were randomized to a web-based debiasing intervention teaching Bayesian estimation and other strategies, or to an active control video, then completed major depressive disorder vignettes. The intervention group made fewer decision-making errors and was more accurate diagnostically, with stronger effects on the risk-estimation vignette and no significant effects when only categorical diagnostic tasks were considered. The authors describe this as preliminary evidence that the intervention transfers to a new clinical and cultural context, with effects much smaller than in the original study.",
+   "highlight": false
+  },
+  {
+   "id": "psyarxiv:k5f7d_v1",
+   "title": "PRELIMINARY FRAMEWORK FOR A DYNAMIC SOCIO-ACOUSTIC MODEL OF SPEECH PERCEPTION",
+   "authors": "",
+   "venue": "PsyArXiv",
+   "url": "https://osf.io/preprints/psyarxiv/k5f7d_v1/",
+   "date": "2026-10-11",
+   "score": 6,
+   "topics": [
+    "language",
+    "models",
+    "social"
+   ],
+   "summary": "This paper proposes a preliminary Dynamic Socio-Acoustic Model in which speech perception is a continuous, multidimensional tracking process, with an acoustic exemplar space not tied to linguistic units and categories built ad hoc as the listener's cognitive space is stretched in response to contrasts. It is a theoretical framework and the abstract reports no empirical test. It aims to recast speech variation as information leading to social meaning rather than an obstacle.",
+   "highlight": false
+  }
+ ]
+}
