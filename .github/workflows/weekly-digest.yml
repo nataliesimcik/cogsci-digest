@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 6 * * 1"   # Mondays 06:00 UTC
   workflow_dispatch:       # "Run workflow" button for manual runs
+    inputs:
+      overview_only:
+        description: "Only refresh this week's overview, summaries and abstracts (no new papers)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -33,12 +38,17 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
       - name: Build this week's digest
-        run: python digest.py
+        run: python digest.py ${{ inputs.overview_only && '--relink' || '' }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
+          # optional, for more abstracts (leave unset if you don't have them)
+          ELSEVIER_API_KEY: ${{ secrets.ELSEVIER_API_KEY }}
+          ELSEVIER_INST_TOKEN: ${{ secrets.ELSEVIER_INST_TOKEN }}
+          SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}
 
       - name: Refresh conference deadlines
+        if: ${{ !inputs.overview_only }}
         run: python conferences.py
         continue-on-error: true      # a failed lookup never blocks the digest
         env:

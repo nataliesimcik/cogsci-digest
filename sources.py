@@ -16,7 +16,8 @@ def _clean(text):
     if not text:
         return ""
     text = re.sub(r"<[^>]+>", " ", text)          # strip JATS/HTML tags
-    return re.sub(r"\s+", " ", text).strip()
+    text = re.sub(r"\s+", " ", text).strip()
+    return re.sub(r"(?i)^(abstract|summary)\s*[:.\-]?\s+", "", text)   # drop a leading "Abstract" label
 
 
 def _short_authors(names, limit=3):
@@ -238,4 +239,71 @@ def enrich_abstracts(papers, email):
             if doi in missing and text.strip():
                 missing.pop(doi)["abstract"] = _clean(text)
 
-    print(f"  Abstracts filled: {before - len(missing)}/{before} (rest are title-only)")
+    _europepmc(missing)
+    _semantic_scholar(missing)
+    _elsevier(missing)
+    print(f"  Abstracts filled: {before - len(missing)}/{before}"
+          + (f" ({len(missing)} still missing; retried next week)" if missing else ""))
+
+
+def _europepmc(missing):
+    dois = list(missing)
+    for i in range(0, len(dois), 25):
+        chunk = dois[i:i + 25]
+        try:
+            data = _get("https://www.ebi.ac.uk/europepmc/webservices/rest/search", params={
+                "query": " OR ".join(f'DOI:"{d}"' for d in chunk),
+                "resultType": "core", "format": "json", "pageSize": 100}).json()
+        except Exception as e:
+            print(f"  ! Europe PMC: {e}")
+            continue
+        for r in data.get("resultList", {}).get("result", []):
+            doi, text = (r.get("doi") or "").lower(), _clean(r.get("abstractText"))
+            if doi in missing and text:
+                missing.pop(doi)["abstract"] = text
+
+
+def _semantic_scholar(missing):
+    import os
+    dois = list(missing)
+    headers = {"User-Agent": UA}
+    if os.environ.get("SEMANTIC_SCHOLAR_API_KEY"):
+        headers["x-api-key"] = os.environ["SEMANTIC_SCHOLAR_API_KEY"]
+    for i in range(0, len(dois), 400):
+        chunk = dois[i:i + 400]
+        try:
+            r = requests.post("https://api.semanticscholar.org/graph/v1/paper/batch",
+                              params={"fields": "abstract"}, json={"ids": [f"DOI:{d}" for d in chunk]},
+                              headers=headers, timeout=TIMEOUT)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"  ! Semantic Scholar: {e}")
+            continue
+        for doi, item in zip(chunk, r.json()):
+            text = _clean((item or {}).get("abstract"))
+            if text and doi in missing:
+                missing.pop(doi)["abstract"] = text
+        time.sleep(1)
+
+
+def _elsevier(missing):
+    """Optional: Elsevier's API (free key for researchers at dev.elsevier.com), set as ELSEVIER_API_KEY."""
+    import os
+    key = os.environ.get("ELSEVIER_API_KEY")
+    if not key:
+        return
+    headers = {"X-ELS-APIKey": key, "Accept": "application/json"}
+    if os.environ.get("ELSEVIER_INST_TOKEN"):
+        headers["X-ELS-Insttoken"] = os.environ["ELSEVIER_INST_TOKEN"]
+    for doi in [d for d in missing if d.startswith("10.1016/")]:
+        try:
+            r = requests.get(f"https://api.elsevier.com/content/article/doi/{doi}",
+                             headers=headers, timeout=TIMEOUT)
+            if r.status_code != 200:
+                continue
+            text = _clean(r.json()["full-text-retrieval-response"]["coredata"].get("dc:description"))
+            if text:
+                missing.pop(doi)["abstract"] = text
+        except Exception as e:
+            print(f"  ! Elsevier {doi}: {e}")
+        time.sleep(0.2)

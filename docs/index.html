@@ -87,9 +87,11 @@ select { font: inherit; font-size: 1rem; color: var(--ink); background-color: va
           max-width: 72ch; font-size: .92rem; box-shadow: 0 4px 14px rgba(0,0,0,.15); }
 .notice button { border: 1px solid currentColor; background: none; color: inherit; border-radius: 6px;
                  padding: 3px 10px; font-size: .88rem; font-weight: 700; }
-.overview a { color: inherit; text-decoration: underline; text-decoration-color: var(--accent);
-              text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.overview a:hover { color: var(--accent); }
+.overview a { color: inherit; text-decoration: underline; text-decoration-color: var(--c, var(--accent));
+              text-decoration-thickness: 3px; text-underline-offset: 4px; text-decoration-skip-ink: none; }
+.overview a::after { content: "\2193"; font: 700 .8em/1 var(--sans); margin-left: 3px; color: var(--c, var(--accent));
+                     display: inline-block; text-decoration: none; vertical-align: .05em; }
+.overview a:hover { background: color-mix(in srgb, var(--c, var(--accent)) 14%, transparent); border-radius: 2px; }
 .notice-on .paper { scroll-margin-top: 76px; }
 .paper { scroll-margin-top: 16px; transition: background-color 1.6s ease; border-radius: 4px; }
 .paper.flash { background-color: var(--accent-soft); transition: none; }
@@ -109,6 +111,20 @@ select { font: inherit; font-size: 1rem; color: var(--ink); background-color: va
                display: inline-flex; align-items: center; gap: 6px; }
 .tags button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
 .tags button:hover { color: var(--ink); }
+.abstract { margin: 0 0 4px; font: 1rem/1.62 var(--serif); }
+.abstract.clamp { display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+.more-abs { border: 0; background: none; padding: 0; margin: 0 0 10px; color: var(--accent); font-size: .88rem; }
+.abs-drop { margin: 0 0 10px; }
+.abs-drop summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+                    color: var(--accent); font-size: .88rem; padding: 2px 0; }
+.abs-drop summary::-webkit-details-marker { display: none; }
+.abs-drop summary::after { content: ""; width: 6px; height: 6px; border: solid currentColor; border-width: 0 1.6px 1.6px 0;
+                           transform: rotate(45deg) translateY(-2px); transition: transform .15s; }
+.abs-drop[open] summary::after { transform: rotate(-135deg) translateY(-1px); }
+.abs-drop .abstract { margin-top: 8px; padding-left: 12px; border-left: 2px solid var(--rule); color: var(--ink);
+                      font-size: .95rem; }
+.no-abs { margin: 0 0 10px; color: var(--muted); font-size: .92rem; font-style: italic; }
+.no-abs a { font-style: normal; }
 .suggested { margin: 0 0 8px; font-size: .9rem; color: var(--muted); }
 .suggested q { font-style: italic; }
 .empty { color: var(--muted); padding: 24px 0; max-width: 60ch; }
@@ -171,6 +187,13 @@ details li span { color: var(--muted); display: block; font-size: .85rem; }
 .panel-foot p { margin: 0 0 6px; }
 .links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: .9rem; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.to-top { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom));
+          z-index: 10; display: inline-flex; align-items: center; gap: 6px; border: 0; border-radius: 999px;
+          padding: 10px 16px 10px 13px; background: var(--ink); color: var(--bg); font-size: .9rem; font-weight: 700;
+          box-shadow: 0 4px 16px rgba(0,0,0,.18); opacity: 0; transform: translateY(8px); pointer-events: none;
+          transition: opacity .2s, transform .2s; }
+.to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+.to-top svg { width: 14px; height: 14px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
@@ -188,7 +211,7 @@ details li span { color: var(--muted); display: block; font-size: .85rem; }
   <ul class="legend" id="legend" aria-label="Filter by topic"></ul>
 
   <div class="tools">
-    <input type="search" id="q" placeholder="Search titles, authors, summaries" aria-label="Search papers">
+    <input type="search" id="q" placeholder="Search titles, authors, abstracts" aria-label="Search papers">
     <label><input type="checkbox" id="top"> Top picks only</label>
     <span class="count"><span id="count" aria-live="polite"></span>
       <a href="#screened" id="screened-link" hidden></a></span>
@@ -197,7 +220,7 @@ details li span { color: var(--muted); display: block; font-size: .85rem; }
   <div class="layout">
     <main>
       <details class="overview" id="overview" open hidden>
-        <summary>This week in brief <span class="hint">overview of all papers</span></summary><p></p>
+        <summary>This week's overview <span class="hint">covers all topics</span></summary><p></p>
       </details>
       <div class="notice" id="notice" role="status" hidden>
         <span id="notice-text">Showing all papers.</span><button id="notice-undo"></button>
@@ -235,6 +258,11 @@ details li span { color: var(--muted); display: block; font-size: .85rem; }
     </aside>
   </div>
 </div>
+
+<button class="to-top" id="to-top" aria-label="Back to top" tabindex="-1">
+  <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 12V2M2.5 6.5 7 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  Top
+</button>
 
 <script>
 const PALETTE = ["#3E7CB1","#D1495B","#E0A030","#00798C","#8E6C8A","#5E9E78","#E07A5F",
@@ -290,7 +318,7 @@ function visible() {
   return state.data.papers.filter(p =>
     (!state.top || p.highlight) &&
     (!state.topics.size || (p.topics || []).some(t => state.topics.has(t))) &&
-    (!q || [p.title, p.authors, p.summary, p.venue].join(" ").toLowerCase().includes(q)));
+    (!q || [p.title, p.authors, p.summary, p.abstract, p.venue].join(" ").toLowerCase().includes(q)));
 }
 function renderStrip() {
   const counts = {};
@@ -308,6 +336,31 @@ function renderStrip() {
   $("legend").replaceChildren(...items);
   $("app").classList.toggle("filtering", state.topics.size > 0);
 }
+// what each paper shows. display "both" (default): short summary + full abstract in a dropdown;
+// "abstract": the abstract only; "summary": the summary only
+function body(p) {
+  const mode = state.index.display || "both";
+  const summary = p.summary ? el("p", { class: "summary" }, p.summary) : null;
+  if (!("abstract" in p)) return summary;                       // weeks made before abstracts were stored
+  if (!p.abstract) return el("p", { class: "no-abs" }, "Abstract not available yet. ",
+    el("a", { href: p.url, target: "_blank", rel: "noopener" }, "Read it on the publisher's site"), ".");
+  if (mode === "summary" && summary) return summary;
+  if (mode === "both" && summary) {
+    const label = el("span", {}, "Show full abstract");
+    const drop = el("details", { class: "abs-drop" }, el("summary", {}, label), el("p", { class: "abstract" }, p.abstract));
+    drop.addEventListener("toggle", () => label.textContent = drop.open ? "Hide abstract" : "Show full abstract");
+    return [summary, drop];
+  }
+  // trimmed to 5 lines; the button only appears if the text is actually longer (checked after render)
+  const para = el("p", { class: "abstract clamp" }, p.abstract);
+  const btn = el("button", { class: "more-abs", "aria-expanded": "false", hidden: true, onclick: () => {
+    const open = para.classList.toggle("clamp") === false;
+    btn.textContent = open ? "Show less" : "Show full abstract";
+    btn.setAttribute("aria-expanded", String(open));
+  } }, "Show full abstract");
+  return [para, btn];
+}
+
 function renderPapers() {
   renderStrip();
   // full overview on the unfiltered view; a slim, closed bar while filtering
@@ -340,20 +393,32 @@ function renderPapers() {
         p.authors ? p.authors + ", " : "", el("cite", {}, p.venue)),
       p.suggested_by ? el("p", { class: "suggested" }, `Suggested by ${p.suggested_by}`,
         p.suggest_note ? [": ", el("q", {}, p.suggest_note)] : null) : null,
-      p.summary ? el("p", { class: "summary" }, p.summary) : null,
+      body(p),
       el("div", { class: "tags" }, (p.topics || []).map(t => el("button", {
         style: `--c:${color[t]}`, onclick: () => toggleTopic(t), title: `Show only ${label(t)}`
       }, label(t)))));
   }));
+  requestAnimationFrame(fitAbstracts);
+}
+function fitAbstracts() {
+  document.querySelectorAll(".abstract.clamp").forEach(a => {
+    const btn = a.nextElementSibling;
+    if (btn && btn.classList.contains("more-abs")) btn.hidden = a.scrollHeight <= a.clientHeight + 2;
+  });
 }
 // ----- overview with links to papers -----
 function renderOverview(text) {
-  const out = [], re = /\[([^\]]+)\]\(#p([\d,]+)\)/g;
+  const out = [], re = /\[([^\]]+)\]\(\s*#?p?([\d,\s]+)\)/g;
   let last = 0, m;
   while ((m = re.exec(text))) {
     out.push(text.slice(last, m.index));
-    const nums = m[2].split(",").filter(Boolean);
-    out.push(el("a", { href: `#paper-${nums[0]}`, onclick: e => { e.preventDefault(); goToPapers(nums); } }, m[1]));
+    const nums = m[2].split(",").map(n => n.trim()).filter(n => state.data.papers[n]);
+    if (!nums.length) { out.push(m[1]); last = re.lastIndex; continue; }
+    // underline in the main topic colour of the (first) linked paper, like the line beside it
+    const main = (state.data.papers[nums[0]].topics || [])[0];
+    out.push(el("a", { href: `#paper-${nums[0]}`, style: main ? `--c:${color[main]}` : "",
+                       title: nums.length > 1 ? `Go to these ${nums.length} papers` : "Go to this paper",
+                       onclick: e => { e.preventDefault(); goToPapers(nums); } }, m[1]));
     last = re.lastIndex;
   }
   out.push(text.slice(last));
@@ -516,6 +581,25 @@ function renderDeadlines() {
   $("sq").addEventListener("input", e => { state.sq = e.target.value; state.slimit = 100; renderScreened(); });
   $("sout").addEventListener("change", e => { state.sout = e.target.checked; state.slimit = 100; renderScreened(); });
   $("smore").addEventListener("click", () => { state.slimit += 200; renderScreened(); });
+  // floating "Top" button once the reader has scrolled down a screen
+  const top = $("to-top");
+  let ticking = false;
+  addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const show = scrollY > innerHeight * 0.8;
+      top.classList.toggle("show", show);
+      top.tabIndex = show ? 0 : -1;
+      ticking = false;
+    });
+  }, { passive: true });
+  top.addEventListener("click", () => {
+    scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    $("title").setAttribute("tabindex", "-1"); $("title").focus({ preventScroll: true });
+  });
+  let resizeTimer;
+  addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(fitAbstracts, 150); });
   readHash();
   $("q").addEventListener("input", e => { dropUndo(); state.q = e.target.value; renderPapers(); });
   $("top").addEventListener("change", e => { dropUndo(); state.top = e.target.checked; renderPapers(); });

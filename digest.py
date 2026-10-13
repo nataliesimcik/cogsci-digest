@@ -90,11 +90,16 @@ def screen(client, cfg, papers, batch_size=40):
 
 
 # ---------- summarize ----------
-SUMMARY_SYSTEM = """You write summaries of new research papers for cognitive scientists.
-For each paper write 2-3 sentences: what was done, what was found, why it matters.
-Precise, plain prose, no hype. Base every claim strictly on the title and abstract;
-never invent findings, sample sizes or effect sizes. If no abstract is available,
-write one sentence saying what the title indicates the paper is about.
+SUMMARY_SYSTEM = """You tell members of a cognitive science lab about new papers, the way a
+well-read colleague would over coffee. For each paper write 2-3 natural sentences in plain
+language: what the researchers did, what they found, and why it's interesting.
+
+Style: warm and clear, not academic boilerplate. Vary how sentences start; don't open
+with "This paper", "This study" or "The authors" every time. Explain jargon briefly if
+it's essential, and skip it if it isn't. No hype words (groundbreaking, novel, sheds light).
+
+Accuracy: use only what the title and abstract say. Never invent findings, numbers or
+methods. If no abstract is given, return an empty string as the summary.
 Reply with ONLY a JSON array: [{"id": <int>, "summary": "..."}]"""
 
 OVERVIEW_SYSTEM = """You write the opening of a weekly research digest for a cognitive science
@@ -127,7 +132,7 @@ def summarize(client, cfg, papers, batch_size=15):
         print(f"  summarized {min(i + batch_size, len(papers))}/{len(papers)}")
 
 
-LINK = re.compile(r"\[([^\]]+)\]\(#p?([\d,\s]+)\)")
+LINK = re.compile(r"\[([^\]]+)\]\(\s*#?p?([\d,\s]+)\)")
 
 
 def overview(client, cfg, papers):
@@ -135,7 +140,8 @@ def overview(client, cfg, papers):
     are positions in the published paper list, so the site can scroll to them."""
     tops = [i for i, p in enumerate(papers) if p.get("highlight") or p.get("suggested_by")] \
         or list(range(min(8, len(papers))))
-    text = "\n\n".join(f"[{i}] {papers[i]['title']}: {papers[i].get('summary', '')}" for i in tops)
+    text = "\n\n".join(f"[{i}] {papers[i]['title']}: "
+                       f"{papers[i].get('summary') or (papers[i].get('abstract') or '')[:900]}" for i in tops)
     try:
         out = ask(client, cfg["models"]["write"], OVERVIEW_SYSTEM, text, max_tokens=900).strip()
     except Exception as e:
@@ -160,7 +166,9 @@ def publish(cfg, today, since, papers, intro, fetched, screened):
     week = {
         "week": today.isoformat(), "since": since.isoformat(), "until": today.isoformat(),
         "fetched": fetched, "overview": intro,
-        "papers": [{k: p.get(k) for k in FIELDS if p.get(k) not in (None, "")} for p in papers],
+        # an empty abstract means "not available yet", so that key is always kept
+        "papers": [dict({k: p.get(k) for k in FIELDS if p.get(k) not in (None, "")},
+                        abstract=p.get("abstract") or "") for p in papers],
         # everything that was looked at, for the "All screened papers" section
         "screened": [dict({k: p.get(k) for k in SCREENED_FIELDS if p.get(k) not in (None, "")},
                           selected=p["id"] in selected)
@@ -172,6 +180,7 @@ def publish(cfg, today, since, papers, intro, fetched, screened):
     write_json(DATA / "index.json", {
         "title": cfg["title"], "repo_url": cfg.get("repo_url", ""),
         "topics": [{"key": k, "label": v} for k, v in cfg["topics"].items()],
+        "display": cfg.get("display", "both"),
         "weeks": weeks,
     })
     write_feed(cfg, weeks)
@@ -200,18 +209,114 @@ def write_feed(cfg, weeks):
         + "".join(items) + "</channel></rss>\n")
 
 
+def backfill_abstracts(cfg, weeks=4):
+    """Papers whose abstract wasn't available yet get another try in later weeks."""
+    try:
+        recent = json.loads((DATA / "index.json").read_text())["weeks"][:weeks]
+    except (FileNotFoundError, json.JSONDecodeError, KeyError):
+        return
+    for w in recent:
+        path = DATA / "weeks" / f"{w}.json"
+        try:
+            data = json.loads(path.read_text())
+        except (FileNotFoundError, json.JSONDecodeError):
+            continue
+        todo = [p for p in data["papers"] if not p.get("abstract")]
+        if not todo:
+            continue
+        print(f"  Retrying {len(todo)} missing abstract(s) from week {w}")
+        for p in todo:
+            p["abstract"] = ""
+        sources.enrich_abstracts([p for p in todo if p["id"].startswith("doi:")], cfg["contact_email"])
+        for p in todo:                       # preprints: ask arXiv / PsyArXiv directly
+            try:
+                if p["id"].startswith("arxiv:"):
+                    p["abstract"] = suggestions._from_arxiv(p["id"][6:])["abstract"]
+                elif p["id"].startswith("psyarxiv:"):
+                    p["abstract"] = suggestions._from_osf(p["id"][9:])["abstract"]
+            except Exception as e:
+                print(f"  ! {p['id']}: {e}")
+        write_json(path, data)
+
+
+def fill_summaries(client, cfg, weeks=4, redo=False, skip=None):
+    """Summaries for papers whose abstract arrived later. With redo, rewrite them all."""
+    if cfg.get("display", "both") == "abstract":
+        return
+    try:
+        recent = json.loads((DATA / "index.json").read_text())["weeks"][:weeks]
+    except (FileNotFoundError, json.JSONDecodeError, KeyError):
+        return
+    for w in recent:
+        if w == skip:
+            continue
+        path = DATA / "weeks" / f"{w}.json"
+        try:
+            data = json.loads(path.read_text())
+        except (FileNotFoundError, json.JSONDecodeError):
+            continue
+        todo = [p for p in data["papers"] if p.get("abstract") and (redo or not p.get("summary"))]
+        if redo:   # drop old summaries written without an abstract
+            for p in data["papers"]:
+                if not p.get("abstract"):
+                    p.pop("summary", None)
+        if todo:
+            print(f"  Writing {len(todo)} summary(ies) for week {w}")
+            summarize(client, cfg, todo)
+        if todo or redo:
+            write_json(path, data)
+
+
+def relink(cfg):
+    import anthropic
+    index = json.loads((DATA / "index.json").read_text())
+    week = index["weeks"][0]
+    path = DATA / "weeks" / f"{week}.json"
+    backfill_abstracts(cfg, weeks=1)          # cheap: open databases only, no model calls
+    data = json.loads(path.read_text())
+    if not data["papers"]:
+        print("Latest week has no papers; nothing to do.")
+        return
+    client = anthropic.Anthropic()
+    fill_summaries(client, cfg, weeks=1, redo=True)   # summaries in the current style, from real abstracts
+    data = json.loads(path.read_text())
+    data["overview"] = overview(client, cfg, data["papers"])
+    write_json(path, data)
+    index["display"] = cfg.get("display", "both")
+    write_json(DATA / "index.json", index)
+    write_feed(cfg, index["weeks"])
+    print(f"Rebuilt overview for week {week} ({len(LINK.findall(data['overview']))} links)")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--days", type=int)
+    ap.add_argument("--relink", action="store_true",
+                    help="only rebuild the latest week's overview (with paper links); no fetching")
+    ap.add_argument("--force", action="store_true",
+                    help="rebuild today's digest even if it already exists (costs a full run)")
     args = ap.parse_args()
 
     cfg = load_config()
+    if args.relink:
+        return relink(cfg)
     today = date.today()
     since = today - timedelta(days=args.days or cfg.get("lookback_days", 7))
 
+    # a second full run on the same day would only repeat the work (and the cost)
+    if not args.dry_run and not args.force and (DATA / "weeks" / f"{today.isoformat()}.json").exists():
+        print(f"Today's digest ({today.isoformat()}) already exists, so nothing was done and nothing was spent. "
+              "To refresh only the overview, run the workflow with 'Only rebuild this week's overview' ticked.")
+        return
+
+    try:
+        backfill_abstracts(cfg)
+    except Exception as e:          # never let the retry stop the weekly digest
+        print(f"  ! Abstract retry skipped: {e}")
     seen = load_seen()
-    papers = [p for p in collect(cfg, since, today) if p["id"] not in seen]
+    # papers first seen today stay "new", so a same-day re-run rebuilds this week instead of emptying it
+    papers = [p for p in collect(cfg, since, today) if seen.get(p["id"], today.isoformat()) >= today.isoformat()]
     print(f"{len(papers)} new items after dedupe")
     sources.enrich_abstracts(papers, cfg["contact_email"])
 
@@ -249,8 +354,9 @@ def main():
     suggested = [p for p in scored if p.get("suggested_by")]
     relevant = ranked[:max(cfg["max_papers"] - len(suggested), 0)]
     relevant = sorted(relevant + suggested, key=lambda p: (not p.get("highlight"), -p["score"]))
-    if relevant:
+    if relevant and cfg.get("display", "both") != "abstract":
         summarize(client, cfg, relevant)
+        fill_summaries(client, cfg, skip=today.isoformat())   # earlier weeks' late-arriving abstracts
     intro = overview(client, cfg, relevant) if relevant else ""
 
     publish(cfg, today, since, relevant, intro, len(papers), scored)
