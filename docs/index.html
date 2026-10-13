@@ -21,6 +21,7 @@
           --rule: #2A3244; --accent: #8EA2FF; --accent-soft: #232C4A; }
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 var(--sans); }
 a { color: var(--accent); }
@@ -31,8 +32,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
 header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
 h1 { font: 600 2rem/1.15 var(--serif); margin: 0; letter-spacing: -0.01em; }
 .sub { color: var(--muted); margin: 6px 0 0; }
-select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--rule);
-         border-radius: 6px; padding: 7px 10px; }
+header > div { min-width: 0; flex: 1 1 320px; }
+.week-pick { display: flex; flex-direction: column; gap: 2px; font-size: .85rem; color: var(--muted); max-width: 100%; }
+select { font: inherit; font-size: 1rem; color: var(--ink); background-color: var(--surface); border: 1px solid var(--rule);
+         border-radius: 6px; padding: 7px 34px 7px 10px; max-width: 100%; min-width: 0; width: auto;
+         appearance: none; -webkit-appearance: none; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
+         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%235A6478' stroke-width='1.6'/%3E%3C/svg%3E");
+         background-repeat: no-repeat; background-position: right 12px center; }
+@media (max-width: 600px) { .week-pick, .week-pick select { width: 100%; } }
 
 /* Topic strip: the mix of this week's topics, and the filter */
 .strip { display: flex; height: 34px; margin: 28px 0 10px; border-radius: 4px; overflow: hidden; gap: 2px; }
@@ -53,13 +60,39 @@ select { font: inherit; color: var(--ink); background: var(--surface); border: 1
 .tools input[type=search] { flex: 1 1 260px; max-width: 420px; font: inherit; color: var(--ink);
   background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 12px; }
 .tools label { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); }
-.count { color: var(--muted); margin-left: auto; font-size: .9rem; }
+.count { color: var(--muted); margin-left: auto; font-size: .9rem; display: flex; gap: 14px; flex-wrap: wrap; }
+.btn { display: inline-block; border: 1px solid var(--accent); color: var(--accent); background: none;
+       border-radius: 6px; padding: 6px 12px; font-size: .9rem; text-decoration: none; }
+.btn:hover { background: var(--accent-soft); }
 
 .layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; margin-top: 28px; }
 @media (max-width: 900px) { .layout { grid-template-columns: 1fr; gap: 40px; } }
 
-.overview { font: 1.15rem/1.6 var(--serif); max-width: 68ch; margin: 0 0 28px; padding-bottom: 28px;
-            border-bottom: 1px solid var(--rule); }
+.overview { max-width: 68ch; margin: 0 0 8px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+.overview summary { list-style: none; font: 700 .8rem/1.2 var(--sans); letter-spacing: .06em; text-transform: uppercase;
+                    color: var(--muted); margin: 0 0 8px; cursor: default; }
+.overview summary::-webkit-details-marker { display: none; }
+.overview p { font: 1.15rem/1.6 var(--serif); margin: 0; }
+/* while filtering: a slim bar, closed by default */
+.overview.bar { border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); padding: 0; margin-bottom: 16px; }
+.overview.bar summary { display: flex; align-items: center; gap: 10px; margin: 0; padding: 10px 14px; cursor: pointer; }
+.overview.bar summary .hint { text-transform: none; letter-spacing: 0; font-weight: 400; font-size: .85rem; }
+.overview.bar summary::after { content: ""; margin-left: auto; width: 8px; height: 8px; border: solid var(--muted);
+                               border-width: 0 2px 2px 0; transform: rotate(45deg); transition: transform .15s; }
+.overview.bar[open] summary::after { transform: rotate(-135deg); }
+.overview.bar p { padding: 0 14px 14px; font-size: 1.05rem; }
+.overview:not(.bar) .hint { display: none; }
+.notice { position: sticky; top: 12px; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px;
+          background: var(--ink); color: var(--bg); border-radius: 8px; padding: 9px 14px; margin: 0 0 12px;
+          max-width: 72ch; font-size: .92rem; box-shadow: 0 4px 14px rgba(0,0,0,.15); }
+.notice button { border: 1px solid currentColor; background: none; color: inherit; border-radius: 6px;
+                 padding: 3px 10px; font-size: .88rem; font-weight: 700; }
+.overview a { color: inherit; text-decoration: underline; text-decoration-color: var(--accent);
+              text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.overview a:hover { color: var(--accent); }
+.notice-on .paper { scroll-margin-top: 76px; }
+.paper { scroll-margin-top: 16px; transition: background-color 1.6s ease; border-radius: 4px; }
+.paper.flash { background-color: var(--accent-soft); transition: none; }
 .papers { list-style: none; margin: 0; padding: 0; }
 .paper { position: relative; padding: 20px 0 20px 20px; border-bottom: 1px solid var(--rule); max-width: 72ch; }
 .paper::before { content: ""; position: absolute; left: 0; top: 24px; bottom: 24px; width: 4px;
@@ -76,14 +109,39 @@ select { font: inherit; color: var(--ink); background: var(--surface); border: 1
                display: inline-flex; align-items: center; gap: 6px; }
 .tags button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
 .tags button:hover { color: var(--ink); }
+.suggested { margin: 0 0 8px; font-size: .9rem; color: var(--muted); }
+.suggested q { font-style: italic; }
 .empty { color: var(--muted); padding: 24px 0; max-width: 60ch; }
+
+/* All screened papers */
+.screened { margin-top: 40px; border-top: 2px solid var(--ink); padding-top: 4px; }
+.screened > summary { font: 600 1.25rem/1.3 var(--serif); color: var(--ink); padding: 12px 0; }
+.screened-intro { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between;
+                  margin: 0 0 12px; }
+.screened-intro p { margin: 0; color: var(--muted); max-width: 60ch; font-size: .95rem; }
+.screened-tools { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-bottom: 8px; }
+.screened-tools input[type=search] { flex: 1 1 220px; max-width: 360px; font: inherit; font-size: .95rem; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 6px 10px; }
+.screened-tools label { color: var(--muted); font-size: .9rem; display: inline-flex; gap: 6px; align-items: center; }
+.slist { list-style: none; margin: 0; padding: 0; }
+.srow { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) auto; gap: 4px 12px; align-items: baseline;
+        padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: .93rem; }
+.score { font-weight: 700; color: var(--muted); text-align: right; }
+.srow.in .score { color: var(--accent); }
+.srow a.t { color: var(--ink); text-decoration: none; }
+.srow a.t:hover { text-decoration: underline; }
+.srow .v { color: var(--muted); font-style: italic; }
+.status { font-size: .85rem; white-space: nowrap; color: var(--muted); }
+.srow.in .status { color: var(--accent); font-weight: 700; }
+.status a { color: var(--accent); }
+.more-rows { margin-top: 10px; }
 .empty button { border: 0; background: none; color: var(--accent); padding: 0; text-decoration: underline; }
 
 /* Deadlines panel */
 aside { align-self: start; position: sticky; top: 20px; background: var(--surface); border: 1px solid var(--rule);
-        border-radius: 10px; padding: 20px; }
+        border-radius: 10px; padding: 20px; max-height: calc(100vh - 40px); overflow-y: auto; overscroll-behavior: contain; }
 @media (max-width: 900px) {
-  aside { position: static; order: -1; }
+  aside { position: static; order: -1; max-height: none; overflow: visible; }
   aside:not(.expanded) .dl:nth-child(n+4) { display: none; }
 }
 .show-all { display: none; border: 0; background: none; color: var(--accent); padding: 8px 0 0; font-size: .9rem; }
@@ -123,7 +181,7 @@ details li span { color: var(--muted); display: block; font-size: .85rem; }
       <h1 id="title">Cognitive Science Weekly</h1>
       <p class="sub" id="sub">Loading this week's papers…</p>
     </div>
-    <label><span class="visually-hidden">Week</span><select id="week" aria-label="Choose a week"></select></label>
+    <label class="week-pick" id="week-pick">Week<select id="week"></select></label>
   </header>
 
   <div class="strip" id="strip" role="group" aria-label="Topics this week"></div>
@@ -132,13 +190,34 @@ details li span { color: var(--muted); display: block; font-size: .85rem; }
   <div class="tools">
     <input type="search" id="q" placeholder="Search titles, authors, summaries" aria-label="Search papers">
     <label><input type="checkbox" id="top"> Top picks only</label>
-    <span class="count" id="count" aria-live="polite"></span>
+    <span class="count"><span id="count" aria-live="polite"></span>
+      <a href="#screened" id="screened-link" hidden></a></span>
   </div>
 
   <div class="layout">
     <main>
-      <p class="overview" id="overview" hidden></p>
+      <details class="overview" id="overview" open hidden>
+        <summary>This week in brief <span class="hint">overview of all papers</span></summary><p></p>
+      </details>
+      <div class="notice" id="notice" role="status" hidden>
+        <span id="notice-text">Showing all papers.</span><button id="notice-undo"></button>
+      </div>
       <ol class="papers" id="papers"></ol>
+
+      <details class="screened" id="screened" hidden>
+        <summary id="screened-sum">All screened papers</summary>
+        <div class="screened-intro">
+          <p>Everything the digest looked at this week, most relevant first. Papers below the cut-off
+             aren't in the digest. If one belongs there, suggest it and it's added in the next weekly update.</p>
+          <a class="btn" id="suggest-paper" href="#" target="_blank" rel="noopener" hidden>Suggest a paper</a>
+        </div>
+        <div class="screened-tools">
+          <input type="search" id="sq" placeholder="Search screened papers" aria-label="Search screened papers">
+          <label><input type="checkbox" id="sout"> Only papers not in the digest</label>
+        </div>
+        <ol class="slist" id="slist"></ol>
+        <button class="btn more-rows" id="smore" hidden>Show more</button>
+      </details>
     </main>
     <aside aria-labelledby="dl-h">
       <h2 id="dl-h">Upcoming deadlines</h2>
@@ -163,7 +242,7 @@ const PALETTE = ["#3E7CB1","#D1495B","#E0A030","#00798C","#8E6C8A","#5E9E78","#E
 const REGIONS = ["All", "Europe", "North America", "Online", "Other"];
 const $ = id => document.getElementById(id);
 const state = { index: null, week: null, data: null, topics: new Set(), q: "", top: false,
-                region: "All", confs: [] };
+                region: "All", confs: [], ovMode: null, undo: null, sq: "", sout: false, slimit: 100 };
 const color = {};
 
 function el(tag, attrs = {}, ...kids) {
@@ -179,25 +258,30 @@ function el(tag, attrs = {}, ...kids) {
 const fmt = (iso, opts = { month: "short", day: "numeric", year: "numeric" }) =>
   new Date(iso + "T12:00:00").toLocaleDateString(undefined, opts);
 const label = k => (state.index.topics.find(t => t.key === k) || {}).label || k;
+function issueUrl(template, fields = {}) {
+  const repo = (state.index.repo_url || "").replace(/\/$/, "");
+  if (!repo) return null;
+  const q = new URLSearchParams({ template, ...fields });
+  return `${repo}/issues/new?${q}`;
+}
 
 // ----- URL hash + remembered filters -----
 function readHash() {
   const h = new URLSearchParams(location.hash.slice(1));
   if (h.get("week")) state.week = h.get("week");
   if (h.has("topics")) state.topics = new Set(h.get("topics").split(",").filter(Boolean));
-  else try { const s = localStorage.getItem("cogsci-topics");
-             if (s) state.topics = new Set(JSON.parse(s)); } catch (e) {}
 }
 function writeHash() {
   const h = new URLSearchParams();
   if (state.week && state.week !== state.index.weeks[0]) h.set("week", state.week);
   if (state.topics.size) h.set("topics", [...state.topics].join(","));
   history.replaceState(null, "", h.toString() ? "#" + h : location.pathname);
-  try { localStorage.setItem("cogsci-topics", JSON.stringify([...state.topics])); } catch (e) {}
 }
 
 // ----- papers -----
+function dropUndo() { state.undo = null; $("notice").hidden = true; $("app").classList.remove("notice-on"); }
 function toggleTopic(k) {
+  dropUndo();
   state.topics.has(k) ? state.topics.delete(k) : state.topics.add(k);
   writeHash(); renderPapers();
 }
@@ -220,18 +304,28 @@ function renderStrip() {
     style: `--c:${color[k]}`, "aria-pressed": String(state.topics.has(k)), onclick: () => toggleTopic(k)
   }, label(k), " ", el("span", { class: "n" }, String(counts[k])))));
   if (state.topics.size) items.push(el("li", {}, el("button", { class: "clear",
-    onclick: () => { state.topics.clear(); writeHash(); renderPapers(); } }, "Clear filters")));
+    onclick: () => { dropUndo(); state.topics.clear(); writeHash(); renderPapers(); } }, "Clear filters")));
   $("legend").replaceChildren(...items);
   $("app").classList.toggle("filtering", state.topics.size > 0);
 }
 function renderPapers() {
   renderStrip();
+  // full overview on the unfiltered view; a slim, closed bar while filtering
+  const filtering = state.topics.size > 0 || !!state.q || state.top;
+  const ov = $("overview");
+  ov.hidden = !state.data.overview;
+  if (filtering !== state.ovMode) {
+    ov.classList.toggle("bar", filtering);
+    ov.open = !filtering;
+    ov.querySelector("summary").tabIndex = filtering ? 0 : -1;  // only a toggle while filtering
+    state.ovMode = filtering;
+  }
   const list = visible(), total = state.data.papers.length;
   $("count").textContent = list.length === total ? `${total} papers` : `${list.length} of ${total} papers`;
   if (!list.length) {
     $("papers").replaceChildren(el("li", { class: "empty" }, total
       ? ["No papers match these filters. ", el("button", { onclick: () => {
-          state.topics.clear(); state.q = ""; state.top = false; $("q").value = ""; $("top").checked = false;
+          dropUndo(); state.topics.clear(); state.q = ""; state.top = false; $("q").value = ""; $("top").checked = false;
           writeHash(); renderPapers(); } }, "Clear all filters")]
       : "Nothing matched the lab's interests this week."));
     return;
@@ -239,17 +333,96 @@ function renderPapers() {
   $("papers").replaceChildren(...list.map(p => {
     const ts = p.topics || [];
     const main = ts.find(t => state.topics.has(t)) || ts[0];
-    return el("li", { class: "paper", style: main ? `--c:${color[main]}` : "" },
+    return el("li", { class: "paper", id: `paper-${state.data.papers.indexOf(p)}`, style: main ? `--c:${color[main]}` : "" },
       el("h2", {}, el("a", { href: p.url, target: "_blank", rel: "noopener" }, p.title)),
       el("p", { class: "meta" },
         p.highlight ? el("span", { class: "pick" }, "Top pick") : null,
         p.authors ? p.authors + ", " : "", el("cite", {}, p.venue)),
+      p.suggested_by ? el("p", { class: "suggested" }, `Suggested by ${p.suggested_by}`,
+        p.suggest_note ? [": ", el("q", {}, p.suggest_note)] : null) : null,
       p.summary ? el("p", { class: "summary" }, p.summary) : null,
       el("div", { class: "tags" }, (p.topics || []).map(t => el("button", {
         style: `--c:${color[t]}`, onclick: () => toggleTopic(t), title: `Show only ${label(t)}`
       }, label(t)))));
   }));
 }
+// ----- overview with links to papers -----
+function renderOverview(text) {
+  const out = [], re = /\[([^\]]+)\]\(#p([\d,]+)\)/g;
+  let last = 0, m;
+  while ((m = re.exec(text))) {
+    out.push(text.slice(last, m.index));
+    const nums = m[2].split(",").filter(Boolean);
+    out.push(el("a", { href: `#paper-${nums[0]}`, onclick: e => { e.preventDefault(); goToPapers(nums); } }, m[1]));
+    last = re.lastIndex;
+  }
+  out.push(text.slice(last));
+  $("overview").querySelector("p").replaceChildren(...out);
+}
+function describeFilters(f) {
+  if (f.topics.size) return [...f.topics].map(label).join(", ");
+  if (f.q) return `“${f.q}”`;
+  return "top picks";
+}
+function goToPapers(nums) {
+  const find = () => nums.map(n => document.getElementById(`paper-${n}`)).filter(Boolean);
+  let els = find();
+  if (els.length < nums.length) {
+    // a linked paper is hidden by the filter: show everything, offer a way back
+    state.undo = { topics: new Set(state.topics), q: state.q, top: state.top };
+    state.topics.clear(); state.q = ""; state.top = false;
+    $("q").value = ""; $("top").checked = false;
+    writeHash(); renderPapers();
+    $("notice-undo").textContent = `Back to ${describeFilters(state.undo)}`;
+    $("notice").hidden = false;
+    $("app").classList.add("notice-on");
+    els = find();
+  }
+  if (!els.length) return;
+  const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  els[0].scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
+  const link = els[0].querySelector("h2 a");
+  if (link) link.focus({ preventScroll: true });
+  els.forEach(e => { e.classList.add("flash"); setTimeout(() => e.classList.remove("flash"), 900); });
+}
+
+function undoFilters() {
+  const u = state.undo;
+  if (!u) return;
+  dropUndo();
+  Object.assign(state, { topics: u.topics, q: u.q, top: u.top });
+  $("q").value = u.q; $("top").checked = u.top;
+  writeHash(); renderPapers();
+  document.querySelector(".tools").scrollIntoView({ block: "start" });
+}
+
+// ----- all screened papers -----
+function renderScreened() {
+  const all = state.data.screened || [];
+  $("screened").hidden = !all.length;
+  $("screened-link").hidden = !all.length;
+  if (!all.length) return;
+  $("screened-link").textContent = `All ${all.length} screened`;
+  $("screened-sum").textContent = `All screened papers (${all.length})`;
+  const q = state.sq.toLowerCase();
+  const rows = all.filter(p => (!state.sout || !p.selected) &&
+    (!q || (p.title + " " + p.venue).toLowerCase().includes(q)));
+  const shown = rows.slice(0, state.slimit);
+  $("slist").replaceChildren(...(shown.length ? shown.map(p => {
+    const suggest = !p.selected && issueUrl("paper-suggestion.yml",
+      { title: "Paper suggestion: " + p.title, link: p.url });
+    return el("li", { class: "srow" + (p.selected ? " in" : "") },
+      el("span", { class: "score", title: "Relevance score, 0 to 10" }, String(p.score ?? "")),
+      el("span", {}, el("a", { class: "t", href: p.url, target: "_blank", rel: "noopener" }, p.title), " ",
+        el("span", { class: "v" }, p.venue)),
+      el("span", { class: "status" }, p.selected ? "In digest"
+        : suggest ? el("a", { href: suggest, target: "_blank", rel: "noopener",
+                              title: "Suggest adding this paper to the digest" }, "Suggest") : ""));
+  }) : [el("li", { class: "empty" }, "No screened papers match.")]));
+  $("smore").hidden = rows.length <= state.slimit;
+  $("smore").textContent = `Show more (${rows.length - state.slimit} left)`;
+}
+
 async function loadWeek(w) {
   state.week = w;
   $("week").value = w;
@@ -259,9 +432,10 @@ async function loadWeek(w) {
   const d = state.data;
   $("sub").textContent = `Papers and preprints from ${fmt(d.since, { month: "short", day: "numeric" })} to ` +
     `${fmt(d.until)}. ${d.fetched} new items screened, ${d.papers.length} selected for the lab.`;
-  $("overview").textContent = d.overview || "";
-  $("overview").hidden = !d.overview;
-  writeHash(); renderPapers();
+  renderOverview(d.overview || "");
+  state.slimit = 100;
+  dropUndo();
+  writeHash(); renderPapers(); renderScreened();
 }
 
 // ----- deadlines -----
@@ -320,23 +494,36 @@ function renderDeadlines() {
   const idx = state.index;
   if (idx.title) { $("title").textContent = idx.title; document.title = idx.title; }
   if (idx.repo_url) {
-    const s = $("suggest");
-    s.href = idx.repo_url.replace(/\/$/, "") + "/issues/new?title=" +
-      encodeURIComponent("Add conference: ") + "&body=" + encodeURIComponent("Name:\nWebsite:\n");
-    s.hidden = false;
+    $("suggest").href = issueUrl("conference-suggestion.yml");
+    $("suggest").target = "_blank";
+    $("suggest").hidden = false;
+    $("suggest-paper").href = issueUrl("paper-suggestion.yml");
+    $("suggest-paper").hidden = false;
   }
   idx.topics.forEach((t, i) => color[t.key] = PALETTE[i % PALETTE.length]);
-  $("week").replaceChildren(...idx.weeks.map(w => el("option", { value: w }, "Week of " + fmt(w))));
-  $("week").hidden = !idx.weeks.length;
+  $("week").replaceChildren(...idx.weeks.map(w => el("option", { value: w }, fmt(w))));
+  $("week-pick").hidden = !idx.weeks.length;
 
   $("show-all").addEventListener("click", () => {
     const a = document.querySelector("aside");
     a.classList.add("expanded"); a.classList.remove("has-more");
     $("show-all").setAttribute("aria-expanded", "true");
   });
+  $("screened-link").addEventListener("click", e => {
+    e.preventDefault(); $("screened").open = true;
+    $("screened").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+  $("sq").addEventListener("input", e => { state.sq = e.target.value; state.slimit = 100; renderScreened(); });
+  $("sout").addEventListener("change", e => { state.sout = e.target.checked; state.slimit = 100; renderScreened(); });
+  $("smore").addEventListener("click", () => { state.slimit += 200; renderScreened(); });
   readHash();
-  $("q").addEventListener("input", e => { state.q = e.target.value; renderPapers(); });
-  $("top").addEventListener("change", e => { state.top = e.target.checked; renderPapers(); });
+  $("q").addEventListener("input", e => { dropUndo(); state.q = e.target.value; renderPapers(); });
+  $("top").addEventListener("change", e => { dropUndo(); state.top = e.target.checked; renderPapers(); });
+  $("notice-undo").addEventListener("click", undoFilters);
+  // on the unfiltered view the overview heading is just a heading, not a toggle
+  $("overview").querySelector("summary").addEventListener("click", e => {
+    if (!$("overview").classList.contains("bar")) e.preventDefault();
+  });
   $("week").addEventListener("change", e => loadWeek(e.target.value).catch(err => $("sub").textContent = err.message));
 
   fetch("data/conferences.json").then(r => r.ok ? r.json() : { conferences: [] })

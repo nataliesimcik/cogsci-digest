@@ -1,0 +1,19 @@
+name: Suggest a conference
+description: Add a conference to the deadlines panel
+title: "Conference suggestion: "
+labels: ["conference-suggestion"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Conference name
+    validations:
+      required: true
+  - type: input
+    id: website
+    attributes:
+      label: Website
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes (optional)

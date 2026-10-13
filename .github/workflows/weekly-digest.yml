@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: digest
@@ -23,10 +24,19 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
 
+      - name: Make sure suggestion labels exist
+        continue-on-error: true
+        run: |
+          gh label create paper-suggestion --color 2F4BD8 --description "Paper suggested for the digest" --force
+          gh label create conference-suggestion --color 5E9E78 --description "Conference suggested for the deadlines panel" --force
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - name: Build this week's digest
         run: python digest.py
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Refresh conference deadlines
         run: python conferences.py
@@ -41,3 +51,9 @@ jobs:
           git add docs data
           git diff --cached --quiet || git commit -m "Digest $(date -u +%F)"
           git push
+
+      - name: Reply to paper suggestions
+        continue-on-error: true
+        run: python suggestions.py close
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
