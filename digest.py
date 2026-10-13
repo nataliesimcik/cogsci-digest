@@ -41,7 +41,7 @@ def collect(cfg, since, today):
     papers += sources.fetch_crossref(s.get("journals", []), since, cfg["contact_email"])
     papers += sources.fetch_arxiv(s.get("arxiv_queries", []), since)
     if s.get("psyarxiv"):
-        papers += sources.fetch_psyarxiv(since)
+        papers += sources.fetch_psyarxiv(since, cfg["contact_email"])
     if s.get("biorxiv_categories"):
         papers += sources.fetch_biorxiv(s["biorxiv_categories"], since, today)
     by_id, titles = {}, set()
@@ -156,9 +156,9 @@ def overview(client, cfg, papers):
 
 
 # ---------- publish ----------
-FIELDS = ("id", "title", "authors", "venue", "url", "date", "score", "topics", "summary",
+FIELDS = ("id", "title", "authors", "venue", "kind", "url", "date", "score", "topics", "summary",
           "highlight", "suggested_by", "suggest_note")
-SCREENED_FIELDS = ("title", "url", "venue", "score", "topics", "suggested_by")
+SCREENED_FIELDS = ("title", "url", "venue", "kind", "score", "topics", "suggested_by")
 
 
 def publish(cfg, today, since, papers, intro, fetched, screened):
@@ -181,10 +181,30 @@ def publish(cfg, today, since, papers, intro, fetched, screened):
         "title": cfg["title"], "repo_url": cfg.get("repo_url", ""),
         "topics": [{"key": k, "label": v} for k, v in cfg["topics"].items()],
         "display": cfg.get("display", "both"),
+        "sources": site_sources(cfg),
         "weeks": weeks,
     })
     write_feed(cfg, weeks)
     print(f"Published week {today.isoformat()}: {len(papers)} papers")
+
+
+def site_sources(cfg):
+    """What's screened every week, for the Sources section at the bottom of the site."""
+    s = cfg["sources"]
+    cats = []
+    for q in s.get("arxiv_queries", []):
+        cats += [c for c in re.findall(r"cat:([\w.\-]+)", q) if c not in cats]
+    preprints = []
+    names = {"q-bio.NC": "Neurons and Cognition", "cs.CL": "Computation and Language",
+             "cs.AI": "Artificial Intelligence", "cs.LG": "Machine Learning", "q-bio.QM": "Quantitative Methods",
+             "cs.HC": "Human-Computer Interaction", "stat.ML": "Machine Learning (stats)"}
+    if cats:
+        preprints.append({"name": "arXiv", "detail": ", ".join(f"{names[c]} ({c})" if c in names else c for c in cats)})
+    if s.get("psyarxiv"):
+        preprints.append({"name": "PsyArXiv", "detail": ""})
+    if s.get("biorxiv_categories"):
+        preprints.append({"name": "bioRxiv", "detail": ", ".join(s["biorxiv_categories"])})
+    return {"journals": sorted(j["name"] for j in s.get("journals", [])), "preprints": preprints}
 
 
 def write_feed(cfg, weeks):
@@ -221,8 +241,18 @@ def backfill_abstracts(cfg, weeks=4):
             data = json.loads(path.read_text())
         except (FileNotFoundError, json.JSONDecodeError):
             continue
+        changed = False
+        for p in data["papers"]:              # PsyArXiv authors, which older runs didn't have
+            if p["id"].startswith("psyarxiv:") and not p.get("authors"):
+                rec = sources.psyarxiv_record(p["id"][9:], cfg["contact_email"])
+                if rec and rec["authors"]:
+                    p["authors"] = rec["authors"]
+                    p["abstract"] = p.get("abstract") or rec["abstract"]
+                    changed = True
         todo = [p for p in data["papers"] if not p.get("abstract")]
         if not todo:
+            if changed:
+                write_json(path, data)
             continue
         print(f"  Retrying {len(todo)} missing abstract(s) from week {w}")
         for p in todo:
@@ -283,6 +313,7 @@ def relink(cfg):
     data["overview"] = overview(client, cfg, data["papers"])
     write_json(path, data)
     index["display"] = cfg.get("display", "both")
+    index["sources"] = site_sources(cfg)
     write_json(DATA / "index.json", index)
     write_feed(cfg, index["weeks"])
     print(f"Rebuilt overview for week {week} ({len(LINK.findall(data['overview']))} links)")

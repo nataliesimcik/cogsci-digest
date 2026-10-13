@@ -1,0 +1,19 @@
+name: Suggest a journal
+description: Add a journal to the weekly screening
+title: "Journal suggestion: "
+labels: ["journal-suggestion"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Journal name
+    validations:
+      required: true
+  - type: input
+    id: website
+    attributes:
+      label: Website or ISSN (optional)
+  - type: textarea
+    id: notes
+    attributes:
+      label: Why it's relevant (optional)

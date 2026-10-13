@@ -71,7 +71,7 @@ def fetch_crossref(journals, since: date, email):
                 "abstract": _clean(it.get("abstract")),
                 "authors": _short_authors(authors),
                 "url": f"https://doi.org/{it['DOI']}",
-                "venue": j["name"],
+                "venue": j["name"], "kind": "journal",
                 "date": "-".join(str(p) for p in it["created"]["date-parts"][0]),
             })
         print(f"  Crossref {j['name']}: {len(items)}")
@@ -104,7 +104,7 @@ def fetch_arxiv(queries, since: date):
                 "abstract": _clean(e.summary),
                 "authors": _short_authors([a.name for a in e.get("authors", [])]),
                 "url": f"https://arxiv.org/abs/{arxiv_id}",
-                "venue": "arXiv",
+                "venue": "arXiv", "kind": "preprint",
                 "date": published.isoformat(),
             })
             n += 1
@@ -113,37 +113,93 @@ def fetch_arxiv(queries, since: date):
     return out
 
 
-# ---------- PsyArXiv (OSF API) ----------
-def fetch_psyarxiv(since: date, max_pages=10):
+# ---------- PsyArXiv ----------
+PSYARXIV_PREFIX = "10.31234"
+_OSF_ID = re.compile(r"osf\.io/([a-z0-9]{5})(?:_v(\d+))?$", re.I)
+
+
+def _psyarxiv_from_crossref(it):
+    m = _OSF_ID.search(it.get("DOI", ""))
+    if not m:
+        return None
+    authors = [f"{a.get('given', '')} {a.get('family', '')}".strip() or a.get("name", "")
+               for a in it.get("author", [])]
+    return {
+        "id": f"psyarxiv:{m.group(1).lower()}",
+        "title": _clean((it.get("title") or [""])[0]),
+        "abstract": _clean(it.get("abstract")),
+        "authors": _short_authors(authors),
+        "url": f"https://doi.org/{it['DOI']}",
+        "venue": "PsyArXiv", "kind": "preprint",
+        "date": "-".join(str(x) for x in it.get("created", {}).get("date-parts", [[""]])[0]),
+        "_version": int(m.group(2) or 1),
+    }
+
+
+def fetch_psyarxiv(since: date, email="", max_pages=10):
+    """PsyArXiv preprints via Crossref, which has full author lists (OSF's API doesn't
+    include them in listings). Falls back to the OSF API if Crossref fails."""
+    out, cursor = [], "*"
+    try:
+        for _ in range(max_pages):
+            r = _get(f"https://api.crossref.org/prefixes/{PSYARXIV_PREFIX}/works", params={
+                "filter": f"from-created-date:{since.isoformat()},type:posted-content",
+                "rows": 200, "cursor": cursor, "mailto": email,
+                "select": "DOI,title,abstract,author,created"})
+            msg = r.json()["message"]
+            for it in msg.get("items", []):
+                p = _psyarxiv_from_crossref(it)
+                if p and p["_version"] == 1 and p["title"]:     # new preprints only, not updates
+                    p.pop("_version")
+                    out.append(p)
+            if len(msg.get("items", [])) < 200:
+                break
+            cursor = msg.get("next-cursor")
+        print(f"  PsyArXiv: {len(out)}")
+        return out
+    except Exception as e:
+        print(f"  ! PsyArXiv via Crossref: {e}; trying OSF")
+    return _fetch_psyarxiv_osf(since)
+
+
+def _fetch_psyarxiv_osf(since: date, max_pages=10):
     out = []
     url = "https://api.osf.io/v2/preprints/"
-    params = {
-        "filter[provider]": "psyarxiv",
-        "filter[date_created][gte]": since.isoformat(),
-        "page[size]": 100,
-    }
+    params = {"filter[provider]": "psyarxiv", "filter[date_created][gte]": since.isoformat(),
+              "page[size]": 100}
     for _ in range(max_pages):
         try:
             data = _get(url, params=params).json()
         except Exception as e:
-            print(f"  ! PsyArXiv: {e}")
+            print(f"  ! PsyArXiv (OSF): {e}")
             break
         for p in data.get("data", []):
             a = p.get("attributes", {})
             out.append({
-                "id": f"psyarxiv:{p['id']}",
-                "title": _clean(a.get("title")),
-                "abstract": _clean(a.get("description")),
-                "authors": "",
+                "id": f"psyarxiv:{p['id']}", "title": _clean(a.get("title")),
+                "abstract": _clean(a.get("description")), "authors": "",
                 "url": p.get("links", {}).get("html") or f"https://osf.io/{p['id']}",
-                "venue": "PsyArXiv",
-                "date": (a.get("date_created") or "")[:10],
+                "venue": "PsyArXiv", "kind": "preprint", "date": (a.get("date_created") or "")[:10],
             })
         url, params = data.get("links", {}).get("next"), None
         if not url:
             break
-    print(f"  PsyArXiv: {len(out)}")
+    print(f"  PsyArXiv (OSF): {len(out)}")
     return out
+
+
+def psyarxiv_record(osf_id, email=""):
+    """Authors and abstract for one PsyArXiv preprint, from Crossref."""
+    for doi in (f"{PSYARXIV_PREFIX}/osf.io/{osf_id}_v1", f"{PSYARXIV_PREFIX}/osf.io/{osf_id}"):
+        try:
+            it = _get(f"https://api.crossref.org/works/{doi}", params={"mailto": email}).json()["message"]
+            p = _psyarxiv_from_crossref(it)
+            if p:
+                p.pop("_version", None)
+                return p
+        except Exception:
+            continue
+    return None
 
 
 # ---------- bioRxiv ----------
@@ -170,7 +226,7 @@ def fetch_biorxiv(categories, since: date, until: date, max_calls=40):
                 "abstract": _clean(p.get("abstract")),
                 "authors": _short_authors([s.strip() for s in p.get("authors", "").split(";")]),
                 "url": f"https://www.biorxiv.org/content/{p['doi']}v1",
-                "venue": f"bioRxiv ({p['category']})",
+                "venue": f"bioRxiv ({p['category']})", "kind": "preprint",
                 "date": p.get("date", ""),
             })
         if len(coll) < 100:

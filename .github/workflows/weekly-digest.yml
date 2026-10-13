@@ -34,6 +34,7 @@ jobs:
         run: |
           gh label create paper-suggestion --color 2F4BD8 --description "Paper suggested for the digest" --force
           gh label create conference-suggestion --color 5E9E78 --description "Conference suggested for the deadlines panel" --force
+          gh label create journal-suggestion --color B8961E --description "Journal suggested for weekly screening" --force
         env:
           GH_TOKEN: ${{ github.token }}
 

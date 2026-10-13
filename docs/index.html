@@ -39,7 +39,10 @@ select { font: inherit; font-size: 1rem; color: var(--ink); background-color: va
          appearance: none; -webkit-appearance: none; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%235A6478' stroke-width='1.6'/%3E%3C/svg%3E");
          background-repeat: no-repeat; background-position: right 12px center; }
-@media (max-width: 600px) { .week-pick, .week-pick select { width: 100%; } }
+@media (max-width: 600px) {
+  .week-pick { flex-direction: row; align-items: center; gap: 10px; width: 100%; }
+  .week-pick select { flex: 1; min-width: 0; }
+}
 
 /* Topic strip: the mix of this week's topics, and the filter */
 .strip { display: flex; height: 34px; margin: 28px 0 10px; border-radius: 4px; overflow: hidden; gap: 2px; }
@@ -60,6 +63,12 @@ select { font: inherit; font-size: 1rem; color: var(--ink); background-color: va
 .tools input[type=search] { flex: 1 1 260px; max-width: 420px; font: inherit; color: var(--ink);
   background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 12px; }
 .tools label { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: none; padding: 6px 12px; font-size: .9rem; color: var(--muted);
+              border-left: 1px solid var(--rule); white-space: nowrap; }
+.seg button:first-child { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.seg .n { font-weight: 400; opacity: .8; margin-left: 4px; }
 .count { color: var(--muted); margin-left: auto; font-size: .9rem; display: flex; gap: 14px; flex-wrap: wrap; }
 .btn { display: inline-block; border: 1px solid var(--accent); color: var(--accent); background: none;
        border-radius: 6px; padding: 6px 12px; font-size: .9rem; text-decoration: none; }
@@ -156,13 +165,24 @@ select { font: inherit; font-size: 1rem; color: var(--ink); background-color: va
 /* Deadlines panel */
 aside { align-self: start; position: sticky; top: 20px; background: var(--surface); border: 1px solid var(--rule);
         border-radius: 10px; padding: 20px; max-height: calc(100vh - 40px); overflow-y: auto; overscroll-behavior: contain; }
-@media (max-width: 900px) {
-  aside { position: static; order: -1; max-height: none; overflow: visible; }
-  aside:not(.expanded) .dl:nth-child(n+4) { display: none; }
-}
-.show-all { display: none; border: 0; background: none; color: var(--accent); padding: 8px 0 0; font-size: .9rem; }
-@media (max-width: 900px) { aside.has-more .show-all { display: block; } }
 aside h2 { font: 600 1.25rem/1.2 var(--serif); margin: 0 0 12px; }
+.dl-toggle { all: unset; display: block; width: 100%; cursor: default; }
+.dl-next { display: none; }
+@media (max-width: 900px) {
+  aside { position: static; order: -1; max-height: none; overflow: visible; padding: 0; }
+  aside h2 { margin: 0; }
+  .dl-toggle { display: flex; flex-direction: column; gap: 3px; padding: 14px 44px 14px 16px; cursor: pointer;
+               position: relative; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  .dl-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 10px; }
+  .dl-toggle::after { content: ""; position: absolute; right: 18px; top: 50%; width: 8px; height: 8px; margin-top: -6px;
+                      border: solid var(--muted); border-width: 0 2px 2px 0; transform: rotate(45deg); transition: transform .15s; }
+  aside.open .dl-toggle::after { transform: rotate(-135deg); margin-top: -2px; }
+  .dl-title { font: 600 1.05rem/1.2 var(--serif); }
+  .dl-next { display: block; font: .88rem/1.35 var(--sans); color: var(--muted); }
+  .dl-next strong { color: var(--accent); font-weight: 700; }
+  aside:not(.open) #dl-body { display: none; }
+  #dl-body { padding: 0 16px 16px; }
+}
 .regions { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
 .regions button { border: 1px solid var(--rule); background: none; border-radius: 6px; padding: 3px 9px; font-size: .85rem; }
 .regions button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 700; }
@@ -194,6 +214,79 @@ details li span { color: var(--muted); display: block; font-size: .85rem; }
           transition: opacity .2s, transform .2s; }
 .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
 .to-top svg { width: 14px; height: 14px; }
+/* Sources */
+.sources { margin-top: 56px; padding-top: 20px; border-top: 2px solid var(--ink); }
+.sources h2 { font: 600 1.25rem/1.3 var(--serif); margin: 0 0 6px; }
+.sources > p { color: var(--muted); margin: 0 0 18px; max-width: 70ch; }
+.src-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 24px 48px; }
+.sources h3 { font: 700 .8rem/1.2 var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.src-list { list-style: none; margin: 0; padding: 0; columns: 2 240px; column-gap: 32px; font-size: .95rem; }
+.src-list li { break-inside: avoid; padding: 4px 0; }
+.src-pre { list-style: none; margin: 0; padding: 0; font-size: .95rem; }
+.src-pre li { padding: 4px 0; }
+.src-pre span { display: block; color: var(--muted); font-size: .85rem; }
+.src-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 20px; font-size: .92rem; }
+@media (max-width: 900px) { .src-grid { grid-template-columns: 1fr; } }
+
+/* ---------- phones ---------- */
+@media (max-width: 600px) {
+  .wrap { padding: 20px 16px 88px; }
+  h1 { font-size: 1.55rem; }
+  .sub { font-size: .9rem; }
+  .strip { height: 14px; margin: 18px 0 0; border-radius: 3px; }
+  .strip button { pointer-events: none; }            /* too thin to tap; the chips below do the filtering */
+
+  /* topics: one swipeable row that stays at the top while scrolling */
+  .legend { position: sticky; top: 0; z-index: 6; flex-wrap: nowrap; overflow-x: auto; gap: 8px;
+            margin: 0 -16px; padding: 10px 16px; background: var(--bg); scrollbar-width: none;
+            scroll-snap-type: x proximity; overscroll-behavior-x: contain; }
+  .legend::-webkit-scrollbar { display: none; }
+  .legend li { flex: 0 0 auto; scroll-snap-align: start; }
+  .legend .clear-li { order: -2; }
+  .legend li.on { order: -1; }
+  .legend button { min-height: 38px; padding: 6px 14px 6px 12px; white-space: nowrap;
+                   border: 1px solid var(--rule); background: var(--surface); }
+  .legend button[aria-pressed="true"] { border-color: var(--c); box-shadow: inset 0 0 0 1px var(--c); }
+  .legend .clear { border-color: var(--accent); }
+
+  .tools { margin-top: 12px; gap: 10px 16px; }
+  .tools input[type=search] { flex-basis: 100%; max-width: none; font-size: 16px; padding: 10px 12px; }
+  .tools label { min-height: 36px; }
+  .count { margin-left: 0; width: 100%; justify-content: space-between; align-items: center; }
+  .seg { width: 100%; }
+  .seg button { flex: 1; min-height: 38px; padding: 6px 4px; }
+  .sources { margin-top: 40px; }
+
+  .layout { gap: 20px; margin-top: 16px; }
+  .overview { padding-bottom: 18px; }
+  .overview p { font-size: 1.05rem; line-height: 1.55; }
+  .overview.bar p { font-size: 1rem; }
+  .notice { top: 66px; font-size: .88rem; }
+  .paper { padding: 16px 0 16px 16px; scroll-margin-top: 70px; }
+  .notice-on .paper { scroll-margin-top: 124px; }
+  .paper::before { top: 20px; bottom: 20px; }
+  .paper h2 { font-size: 1.1rem; }
+  .meta { font-size: .88rem; }
+  .summary, .abstract { font-size: .98rem; }
+  .tags { gap: 0 14px; }
+  .tags button { min-height: 32px; }
+  .abs-drop summary { padding: 8px 0; }
+  .more-abs { padding: 6px 0; }
+
+  .regions button { min-height: 34px; padding: 4px 12px; }
+  .dl { padding: 14px 0; }
+
+  .screened > summary { font-size: 1.1rem; }
+  .screened-intro .btn { width: 100%; text-align: center; padding: 10px; }
+  .screened-tools input[type=search] { font-size: 16px; max-width: none; padding: 9px 10px; }
+  .srow { grid-template-columns: 2rem minmax(0, 1fr); padding: 11px 0; }
+  .srow .status { grid-column: 2; }
+  .status a { display: inline-block; padding: 4px 0; }
+
+  .to-top { padding: 10px 14px 10px 12px; }
+  input[type=checkbox] { width: 20px; height: 20px; }
+  #screened-link { display: inline-block; padding: 8px 0; }
+}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
@@ -212,6 +305,7 @@ details li span { color: var(--muted); display: block; font-size: .85rem; }
 
   <div class="tools">
     <input type="search" id="q" placeholder="Search titles, authors, abstracts" aria-label="Search papers">
+    <div class="seg" id="kind" role="group" aria-label="Paper type"></div>
     <label><input type="checkbox" id="top"> Top picks only</label>
     <span class="count"><span id="count" aria-live="polite"></span>
       <a href="#screened" id="screened-link" hidden></a></span>
@@ -220,7 +314,7 @@ details li span { color: var(--muted); display: block; font-size: .85rem; }
   <div class="layout">
     <main>
       <details class="overview" id="overview" open hidden>
-        <summary>This week's overview <span class="hint">covers all topics</span></summary><p></p>
+        <summary>This week's overview <span class="hint">covers all papers</span></summary><p></p>
       </details>
       <div class="notice" id="notice" role="status" hidden>
         <span id="notice-text">Showing all papers.</span><button id="notice-undo"></button>
@@ -243,10 +337,12 @@ details li span { color: var(--muted); display: block; font-size: .85rem; }
       </details>
     </main>
     <aside aria-labelledby="dl-h">
-      <h2 id="dl-h">Upcoming deadlines</h2>
+      <h2 id="dl-h"><button class="dl-toggle" id="dl-toggle" aria-expanded="false" aria-controls="dl-body">
+        <span class="dl-title">Upcoming deadlines</span><span class="dl-next" id="dl-next"></span>
+      </button></h2>
+      <div id="dl-body">
       <div class="regions" id="regions" role="group" aria-label="Filter by region"></div>
       <ul class="deadlines" id="deadlines"></ul>
-      <button class="show-all" id="show-all" aria-expanded="false">Show all deadlines</button>
       <details id="tba" hidden><summary></summary><ul></ul></details>
       <div class="panel-foot">
         <p id="dl-note">Dates are checked weekly with web search. Confirm on the official site before submitting.</p>
@@ -255,8 +351,23 @@ details li span { color: var(--muted); display: block; font-size: .85rem; }
           <a id="suggest" href="#" hidden>Suggest a conference</a>
         </div>
       </div>
+      </div>
     </aside>
   </div>
+
+  <section class="sources" id="sources" aria-labelledby="src-h" hidden>
+    <h2 id="src-h">Sources screened every week</h2>
+    <p>New papers from these journals and preprint servers are checked every Monday, plus any paper
+       suggested by lab members.</p>
+    <div class="src-grid">
+      <div><h3 id="src-j-h">Journals</h3><ul class="src-list" id="src-journals" aria-labelledby="src-j-h"></ul></div>
+      <div><h3 id="src-p-h">Preprint servers</h3><ul class="src-pre" id="src-preprints" aria-labelledby="src-p-h"></ul></div>
+    </div>
+    <div class="src-links">
+      <a id="suggest-journal" href="#" target="_blank" rel="noopener" hidden>Suggest a journal</a>
+      <a href="feed.xml">Subscribe via RSS</a>
+    </div>
+  </section>
 </div>
 
 <button class="to-top" id="to-top" aria-label="Back to top" tabindex="-1">
@@ -270,7 +381,7 @@ const PALETTE = ["#3E7CB1","#D1495B","#E0A030","#00798C","#8E6C8A","#5E9E78","#E
 const REGIONS = ["All", "Europe", "North America", "Online", "Other"];
 const $ = id => document.getElementById(id);
 const state = { index: null, week: null, data: null, topics: new Set(), q: "", top: false,
-                region: "All", confs: [], ovMode: null, undo: null, sq: "", sout: false, slimit: 100 };
+                region: "All", confs: [], kind: "all", ovMode: null, undo: null, sq: "", sout: false, slimit: 100 };
 const color = {};
 
 function el(tag, attrs = {}, ...kids) {
@@ -285,6 +396,10 @@ function el(tag, attrs = {}, ...kids) {
 }
 const fmt = (iso, opts = { month: "short", day: "numeric", year: "numeric" }) =>
   new Date(iso + "T12:00:00").toLocaleDateString(undefined, opts);
+const KINDS = [["all", "All"], ["preprints", "Preprints"], ["published", "Published"]];
+const kindOf = p => p.kind || (/^(arXiv|PsyArXiv|bioRxiv|Preprint)/.test(p.venue || "") ? "preprint"
+  : p.venue === "Suggested link" ? "other" : "journal");
+const kindMatch = p => state.kind === "all" || (state.kind === "preprints" ? kindOf(p) === "preprint" : kindOf(p) === "journal");
 const label = k => (state.index.topics.find(t => t.key === k) || {}).label || k;
 function issueUrl(template, fields = {}) {
   const repo = (state.index.repo_url || "").replace(/\/$/, "");
@@ -298,11 +413,13 @@ function readHash() {
   const h = new URLSearchParams(location.hash.slice(1));
   if (h.get("week")) state.week = h.get("week");
   if (h.has("topics")) state.topics = new Set(h.get("topics").split(",").filter(Boolean));
+  if (["preprints", "published"].includes(h.get("type"))) state.kind = h.get("type");
 }
 function writeHash() {
   const h = new URLSearchParams();
   if (state.week && state.week !== state.index.weeks[0]) h.set("week", state.week);
   if (state.topics.size) h.set("topics", [...state.topics].join(","));
+  if (state.kind !== "all") h.set("type", state.kind);
   history.replaceState(null, "", h.toString() ? "#" + h : location.pathname);
 }
 
@@ -312,11 +429,12 @@ function toggleTopic(k) {
   dropUndo();
   state.topics.has(k) ? state.topics.delete(k) : state.topics.add(k);
   writeHash(); renderPapers();
+  $("legend").scrollTo({ left: 0 });   // on phones, active topics and "Clear" sit at the start of the row
 }
 function visible() {
   const q = state.q.toLowerCase();
   return state.data.papers.filter(p =>
-    (!state.top || p.highlight) &&
+    (!state.top || p.highlight) && kindMatch(p) &&
     (!state.topics.size || (p.topics || []).some(t => state.topics.has(t))) &&
     (!q || [p.title, p.authors, p.summary, p.abstract, p.venue].join(" ").toLowerCase().includes(q)));
 }
@@ -328,10 +446,10 @@ function renderStrip() {
     style: `--c:${color[k]};flex-grow:${counts[k]}`, title: `${label(k)} (${counts[k]})`,
     "aria-label": `${label(k)}, ${counts[k]} papers`, "aria-pressed": String(state.topics.has(k)),
     onclick: () => toggleTopic(k) })));
-  const items = keys.map(k => el("li", {}, el("button", {
+  const items = keys.map(k => el("li", { class: state.topics.has(k) ? "on" : "" }, el("button", {
     style: `--c:${color[k]}`, "aria-pressed": String(state.topics.has(k)), onclick: () => toggleTopic(k)
   }, label(k), " ", el("span", { class: "n" }, String(counts[k])))));
-  if (state.topics.size) items.push(el("li", {}, el("button", { class: "clear",
+  if (state.topics.size) items.push(el("li", { class: "clear-li" }, el("button", { class: "clear",
     onclick: () => { dropUndo(); state.topics.clear(); writeHash(); renderPapers(); } }, "Clear filters")));
   $("legend").replaceChildren(...items);
   $("app").classList.toggle("filtering", state.topics.size > 0);
@@ -361,10 +479,22 @@ function body(p) {
   return [para, btn];
 }
 
+function renderKinds() {
+  const ps = state.data.papers;
+  const n = { all: ps.length, preprints: ps.filter(p => kindOf(p) === "preprint").length,
+              published: ps.filter(p => kindOf(p) === "journal").length };
+  $("kind").replaceChildren(...KINDS.map(([k, name]) => el("button", {
+    "aria-pressed": String(state.kind === k), onclick: () => {
+      if (state.kind === k) return;
+      dropUndo(); state.kind = k; writeHash(); renderPapers();
+    } }, name, el("span", { class: "n" }, String(n[k])))));
+}
+
 function renderPapers() {
   renderStrip();
   // full overview on the unfiltered view; a slim, closed bar while filtering
-  const filtering = state.topics.size > 0 || !!state.q || state.top;
+  const filtering = state.topics.size > 0 || !!state.q || state.top || state.kind !== "all";
+  renderKinds();
   const ov = $("overview");
   ov.hidden = !state.data.overview;
   if (filtering !== state.ovMode) {
@@ -378,7 +508,7 @@ function renderPapers() {
   if (!list.length) {
     $("papers").replaceChildren(el("li", { class: "empty" }, total
       ? ["No papers match these filters. ", el("button", { onclick: () => {
-          dropUndo(); state.topics.clear(); state.q = ""; state.top = false; $("q").value = ""; $("top").checked = false;
+          dropUndo(); state.topics.clear(); state.q = ""; state.top = false; state.kind = "all"; $("q").value = ""; $("top").checked = false;
           writeHash(); renderPapers(); } }, "Clear all filters")]
       : "Nothing matched the lab's interests this week."));
     return;
@@ -426,6 +556,7 @@ function renderOverview(text) {
 }
 function describeFilters(f) {
   if (f.topics.size) return [...f.topics].map(label).join(", ");
+  if (f.kind && f.kind !== "all") return f.kind;
   if (f.q) return `“${f.q}”`;
   return "top picks";
 }
@@ -434,8 +565,8 @@ function goToPapers(nums) {
   let els = find();
   if (els.length < nums.length) {
     // a linked paper is hidden by the filter: show everything, offer a way back
-    state.undo = { topics: new Set(state.topics), q: state.q, top: state.top };
-    state.topics.clear(); state.q = ""; state.top = false;
+    state.undo = { topics: new Set(state.topics), q: state.q, top: state.top, kind: state.kind };
+    state.topics.clear(); state.q = ""; state.top = false; state.kind = "all";
     $("q").value = ""; $("top").checked = false;
     writeHash(); renderPapers();
     $("notice-undo").textContent = `Back to ${describeFilters(state.undo)}`;
@@ -455,7 +586,7 @@ function undoFilters() {
   const u = state.undo;
   if (!u) return;
   dropUndo();
-  Object.assign(state, { topics: u.topics, q: u.q, top: u.top });
+  Object.assign(state, { topics: u.topics, q: u.q, top: u.top, kind: u.kind || "all" });
   $("q").value = u.q; $("top").checked = u.top;
   writeHash(); renderPapers();
   document.querySelector(".tools").scrollIntoView({ block: "start" });
@@ -534,8 +665,12 @@ function renderDeadlines() {
   }) : [el("li", { class: "empty" }, state.confs.length
         ? "No announced deadlines in this region yet." : "Deadlines appear after the first weekly run.")]));
 
-  const aside = document.querySelector("aside");
-  aside.classList.toggle("has-more", upcoming.length > 3 && !aside.classList.contains("expanded"));
+  // one-line preview for the collapsed card on phones
+  const first = upcoming[0];
+  const left = first && days(first.next[0].date);
+  $("dl-next").replaceChildren(...(first ? [`Next: ${first.c.edition || first.c.name}, `,
+    el("strong", {}, fmt(first.next[0].date, { month: "short", day: "numeric" })),
+    ` (${left === 0 ? "today" : left === 1 ? "tomorrow" : `in ${left} days`})`] : ["No announced deadlines yet"]));
   const box = $("tba");
   box.hidden = !tba.length;
   box.querySelector("summary").textContent = `Not announced yet (${tba.length})`;
@@ -566,13 +701,26 @@ function renderDeadlines() {
     $("suggest-paper").hidden = false;
   }
   idx.topics.forEach((t, i) => color[t.key] = PALETTE[i % PALETTE.length]);
+  if (idx.sources && (idx.sources.journals || []).length) {
+    $("src-journals").replaceChildren(...idx.sources.journals.map(j => el("li", {}, j)));
+    $("src-preprints").replaceChildren(...(idx.sources.preprints || []).map(s =>
+      el("li", {}, s.name, s.detail ? el("span", {}, s.detail) : null)));
+    $("sources").hidden = false;
+    const sj = issueUrl("journal-suggestion.yml");
+    if (sj) { $("suggest-journal").href = sj; $("suggest-journal").hidden = false; }
+  }
   $("week").replaceChildren(...idx.weeks.map(w => el("option", { value: w }, fmt(w))));
   $("week-pick").hidden = !idx.weeks.length;
 
-  $("show-all").addEventListener("click", () => {
+  // deadlines: a tap-to-open card on phones, a plain heading on wider screens
+  const narrow = matchMedia("(max-width: 900px)");
+  const syncToggle = () => { $("dl-toggle").tabIndex = narrow.matches ? 0 : -1; };
+  narrow.addEventListener("change", syncToggle); syncToggle();
+  $("dl-toggle").addEventListener("click", () => {
+    if (!narrow.matches) return;
     const a = document.querySelector("aside");
-    a.classList.add("expanded"); a.classList.remove("has-more");
-    $("show-all").setAttribute("aria-expanded", "true");
+    const open = a.classList.toggle("open");
+    $("dl-toggle").setAttribute("aria-expanded", String(open));
   });
   $("screened-link").addEventListener("click", e => {
     e.preventDefault(); $("screened").open = true;

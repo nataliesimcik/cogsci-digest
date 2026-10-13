@@ -95,7 +95,7 @@ def resolve(s, email):
         if not link.startswith("http"):
             return None
         paper = {"id": f"url:{link}", "title": s["title"] or link, "abstract": "",
-                 "authors": "", "url": link, "venue": "Suggested link", "date": ""}
+                 "authors": "", "url": link, "venue": "Suggested link", "kind": "other", "date": ""}
     if not paper["title"]:
         paper["title"] = s["title"] or link
     paper.update(suggested_by=s["user"], suggest_note=s["why"], issue=s["number"])
@@ -113,6 +113,7 @@ def _from_crossref(doi, email):
         "id": f"doi:{doi.lower()}", "title": sources._clean((it.get("title") or [""])[0]),
         "abstract": sources._clean(it.get("abstract")), "authors": sources._short_authors(authors),
         "url": f"https://doi.org/{doi}", "venue": venue,
+        "kind": "preprint" if (it.get("type") == "posted-content" or it.get("subtype") == "preprint") else "journal",
         "date": "-".join(str(x) for x in it.get("created", {}).get("date-parts", [[""]])[0]),
     }
     if not paper["abstract"]:
@@ -126,15 +127,18 @@ def _from_arxiv(arxiv_id):
     return {"id": f"arxiv:{arxiv_id}", "title": sources._clean(e.title),
             "abstract": sources._clean(e.summary),
             "authors": sources._short_authors([a.name for a in e.get("authors", [])]),
-            "url": f"https://arxiv.org/abs/{arxiv_id}", "venue": "arXiv",
+            "url": f"https://arxiv.org/abs/{arxiv_id}", "venue": "arXiv", "kind": "preprint",
             "date": e.get("published", "")[:10]}
 
 
 def _from_osf(osf_id):
+    rec = sources.psyarxiv_record(osf_id)          # Crossref: has authors
+    if rec and rec["title"]:
+        return rec
     a = sources._get(f"https://api.osf.io/v2/preprints/{osf_id}/").json()["data"]["attributes"]
     return {"id": f"psyarxiv:{osf_id}", "title": sources._clean(a.get("title")),
             "abstract": sources._clean(a.get("description")), "authors": "",
-            "url": f"https://osf.io/{osf_id}", "venue": "PsyArXiv",
+            "url": f"https://osf.io/{osf_id}", "venue": "PsyArXiv", "kind": "preprint",
             "date": (a.get("date_created") or "")[:10]}
 
 
