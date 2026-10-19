@@ -63,9 +63,48 @@
    "label": "Methods & replication"
   }
  ],
+ "display": "both",
+ "sources": {
+  "journals": [
+   "Attention, Perception, & Psychophysics",
+   "Cognition",
+   "Cognitive Psychology",
+   "Cognitive Science",
+   "Cortex",
+   "JEP: Human Perception and Performance",
+   "JEP: Learning, Memory, and Cognition",
+   "Journal of Cognitive Neuroscience",
+   "Journal of Experimental Psychology: General",
+   "Journal of Memory and Language",
+   "Journal of Vision",
+   "Memory & Cognition",
+   "Nature Human Behaviour",
+   "Neuropsychologia",
+   "Open Mind",
+   "Psychological Review",
+   "Psychological Science",
+   "Psychonomic Bulletin & Review",
+   "Trends in Cognitive Sciences",
+   "Vision Research"
+  ],
+  "preprints": [
+   {
+    "name": "arXiv",
+    "detail": "Neurons and Cognition (q-bio.NC), Computation and Language (cs.CL), Artificial Intelligence (cs.AI)"
+   },
+   {
+    "name": "PsyArXiv",
+    "detail": ""
+   },
+   {
+    "name": "bioRxiv",
+    "detail": "animal behavior and cognition, neuroscience"
+   }
+  ]
+ },
  "weeks": [
+  "2026-10-19",
   "2026-10-12",
   "2026-10-11"
- ],
- "display": "both"
+ ]
 }
