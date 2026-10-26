@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-19",
+ "updated": "2026-10-26",
  "conferences": [
   {
    "name": "CogSci (Cognitive Science Society)",
@@ -10,10 +10,10 @@
    "start_date": "2027-07-28",
    "deadlines": [],
    "status": "not announced",
-   "typical_timing": "Submissions usually open in late November and close in early February. CogSci 2026 opened November 26, 2025 and closed February 2, 2026. The society's FAQ says the deadline is typically February 1.",
+   "typical_timing": "Usually early February (the CogSci 2026 submission deadline was Feb 2, 2026). The call for submissions is typically released in late Nov, and the CogSci 2026 call opened Nov 26, 2025.",
    "source_url": "https://cognitivesciencesociety.org/cogsci-2027/",
    "official_url": "https://cognitivesciencesociety.org/cogsci-2027/",
-   "checked": "2026-10-11"
+   "checked": "2026-10-26"
   },
   {
    "name": "Psychonomic Society Annual Meeting",
@@ -24,23 +24,27 @@
    "start_date": "2026-11-19",
    "deadlines": [
     {
-     "label": "Abstracts (talks and posters) - closed",
+     "label": "Abstracts (talks and posters)",
      "date": "2026-06-01"
     },
     {
-     "label": "Travel awards (Yates, Graduate, Developing Nations) - closed",
+     "label": "Travel awards and grants applications",
      "date": "2026-05-08"
     },
     {
-     "label": "Early registration - closed",
+     "label": "Lunchtime workshop proposals",
+     "date": "2026-06-30"
+    },
+    {
+     "label": "Early registration",
      "date": "2026-08-31"
     },
     {
-     "label": "Hotel reservations (Marriott Marquis San Diego Marina)",
+     "label": "Hotel reservations (or until the block fills)",
      "date": "2026-10-26"
     },
     {
-     "label": "Regular registration",
+     "label": "Regular registration (late fees apply after this date)",
      "date": "2026-10-31"
     }
    ],
@@ -48,7 +52,7 @@
    "typical_timing": "",
    "source_url": "https://www.psychonomic.org/page/2026annualmeeting",
    "official_url": "https://www.psychonomic.org",
-   "checked": "2026-10-11"
+   "checked": "2026-10-26"
   },
   {
    "name": "ESCoP (European Society for Cognitive Psychology)",
@@ -59,11 +63,11 @@
    "start_date": "2027-08-30",
    "deadlines": [
     {
-     "label": "Symposia abstracts (opens 2026-10-01)",
+     "label": "Symposium proposals (submission window opens 2026-10-15)",
      "date": "2026-11-30"
     },
     {
-     "label": "Individual abstracts (regular presentations, blitz talks, posters) – submission window opens 2027-01-15",
+     "label": "Individual abstracts (regular presentations, blitz talks, posters, accepted symposia) – window opens 2027-01-15",
      "date": "2027-03-15"
     },
     {
@@ -74,88 +78,88 @@
    "status": "announced",
    "typical_timing": "",
    "source_url": "https://escop2027.org/",
-   "official_url": "https://www.escop.eu",
-   "checked": "2026-10-11"
+   "official_url": "https://escop2027.org/",
+   "checked": "2026-10-26"
   },
   {
    "name": "Experimental Psychology Society (EPS) meetings",
    "edition": "EPS Meeting, University College London, January 2027",
    "location": "London, United Kingdom",
    "region": "Europe",
-   "dates": "6–8 January 2027",
+   "dates": "6th–8th January 2027",
    "start_date": "2027-01-06",
    "deadlines": [
     {
-     "label": "Abstract submission portal opened (stayed open 24 hours; already closed, submitters have been notified)",
+     "label": "Abstract submission portal (opened 10am UK time and closed after 24 hours, so submissions are now closed)",
      "date": "2026-09-07"
     }
    ],
    "status": "announced",
-   "typical_timing": "EPS uses a first-come, 24-hour submission portal instead of a fixed deadline. The January meeting portal usually opens in early September of the previous year. The Spring meeting portal opens in early January, and the Summer meeting portal opens in early April. The next meetings are Cardiff (7–9 April 2027) and UEA (7–9 July 2027).",
+   "typical_timing": "The EPS has no fixed deadline. Its portal opens briefly for each meeting: early September for the January meeting, early January for the Spring meeting and early April for the Summer meeting. The next meeting after London is Cardiff University, 7th–9th April 2027, and its portal should open in early January 2027.",
    "source_url": "https://eps.ac.uk/next-meeting/",
    "official_url": "https://eps.ac.uk",
-   "checked": "2026-10-11"
+   "checked": "2026-10-26"
   },
   {
    "name": "TeaP (Tagung experimentell arbeitender Psycholog:innen)",
    "edition": "TeaP 2027 (69th Tagung experimentell arbeitender Psycholog:innen)",
    "location": "Mannheim, Germany",
    "region": "Europe",
-   "dates": "March 21-24, 2027",
+   "dates": "21–24 March 2027",
    "start_date": "2027-03-21",
    "deadlines": [],
    "status": "not announced",
-   "typical_timing": "Organizers expect to open abstract submissions in October 2026. ESCOP lists the abstract deadline as around October/November 2026. Past editions had deadlines in mid-January (TeaP 2019, 15 January) and mid-November (TeaP 2013, 15 November for individual papers).",
-   "source_url": "https://www.uni-mannheim.de/teap-2027",
-   "official_url": "https://www.uni-mannheim.de/teap-2027",
-   "checked": "2026-10-11"
+   "typical_timing": "Abstract submission usually runs from late October to mid-November. TeaP 2026 talks and posters were due 27 Oct–16 Nov 2025, and symposia 1–19 Oct 2025. ESCOP lists the TeaP 2027 deadline only as 'around October/November 2026'.",
+   "source_url": "https://www.escop.eu/news/news/conference-news/teap-2027-tagung-experimentell-arbeitender-psycholog-innen-conference-of-experimental-psychologists",
+   "official_url": "https://www.uni-mannheim.de/teap-2027/",
+   "checked": "2026-10-26"
   },
   {
    "name": "Cognitive Neuroscience Society (CNS)",
-   "edition": "CNS 2027 Annual Meeting (34th Annual Meeting of the Cognitive Neuroscience Society)",
+   "edition": "CNS 2027 Annual Meeting (34th)",
    "location": "Boston, United States",
    "region": "North America",
    "dates": "March 20-23, 2027",
    "start_date": "2027-03-20",
    "deadlines": [
     {
-     "label": "Symposium submission deadline",
+     "label": "Symposium submissions",
      "date": "2026-09-22"
     },
     {
-     "label": "Poster submission deadline",
+     "label": "Poster submissions",
      "date": "2026-11-03"
     },
     {
-     "label": "Travel award application deadline",
+     "label": "Travel award applications",
      "date": "2026-11-03"
     },
     {
-     "label": "Poster accept/reject notifications emailed",
-     "date": "2026-12-04"
+     "label": "Volunteer applications",
+     "date": "2027-01-04"
     },
     {
-     "label": "Late-breaking poster submissions open",
-     "date": "2026-12-08"
+     "label": "Early registration",
+     "date": "2027-01-04"
     },
     {
-     "label": "Early registration rate deadline",
-     "date": "2027-01-05"
-    },
-    {
-     "label": "Late-breaking poster submissions deadline",
+     "label": "Late-breaking poster submissions",
      "date": "2027-01-19"
     },
     {
-     "label": "Regular registration rate deadline",
-     "date": "2027-02-12"
+     "label": "Regular registration",
+     "date": "2027-02-15"
+    },
+    {
+     "label": "Hotel reservations",
+     "date": "2027-02-24"
     }
    ],
    "status": "announced",
    "typical_timing": "",
    "source_url": "https://www.cogneurosociety.org/dates-and-deadlines/",
    "official_url": "https://www.cogneurosociety.org",
-   "checked": "2026-10-11"
+   "checked": "2026-10-26"
   },
   {
    "name": "Cognitive Computational Neuroscience (CCN)",
@@ -164,65 +168,103 @@
    "region": "Europe",
    "dates": "July 26-29, 2027",
    "start_date": "2027-07-26",
-   "deadlines": [],
-   "status": "not announced",
-   "typical_timing": "Usually early-to-mid February for 8-page proceedings papers (CCN 2026: abstracts Feb 9, full papers Feb 12). 2-page extended abstracts are usually due in early April (CCN 2026: April 2). GACs, keynotes/tutorials and community events are usually due in March.",
-   "source_url": "https://2027.ccneuro.org/",
-   "official_url": "https://2027.ccneuro.org/",
-   "checked": "2026-10-11"
+   "deadlines": [
+    {
+     "label": "8-page Proceedings Abstract",
+     "date": "2027-02-01"
+    },
+    {
+     "label": "8-page Proceedings Full Paper",
+     "date": "2027-02-04"
+    },
+    {
+     "label": "Event submissions (e.g., GACs, Community Events)",
+     "date": "2027-03-18"
+    },
+    {
+     "label": "2-page Extended Abstract",
+     "date": "2027-04-01"
+    },
+    {
+     "label": "Early Registration",
+     "date": "2027-05-20"
+    }
+   ],
+   "status": "announced",
+   "typical_timing": "",
+   "source_url": "https://www.ccneuro.org/",
+   "official_url": "https://ccneuro.org",
+   "checked": "2026-10-26"
   },
   {
    "name": "Vision Sciences Society (VSS)",
    "edition": "VSS 2027 (Vision Sciences Society Annual Meeting)",
-   "location": "Seattle, Washington, USA",
+   "location": "Seattle, United States",
    "region": "North America",
    "dates": "May 21-25, 2027",
    "start_date": "2027-05-21",
-   "deadlines": [],
-   "status": "not announced",
-   "typical_timing": "Abstract submissions usually open around Oct 20 and close in early December. The 2026 cycle opened Oct 20, 2025, and the deadline was extended to Dec 10, 2025. The 2019 meeting's deadline was Dec 3, 2018. Early registration usually closes in late February.",
-   "source_url": "https://www.visionsciences.org/future-meetings/",
+   "deadlines": [
+    {
+     "label": "Symposium submissions",
+     "date": "2026-11-13"
+    },
+    {
+     "label": "Abstract submissions",
+     "date": "2026-12-03"
+    },
+    {
+     "label": "Intention to submit travel award application",
+     "date": "2026-12-03"
+    },
+    {
+     "label": "Notification of accepted abstracts",
+     "date": "2027-02-09"
+    }
+   ],
+   "status": "announced",
+   "typical_timing": "",
+   "source_url": "https://www.visionsciences.org/dates-and-deadlines/",
    "official_url": "https://www.visionsciences.org",
-   "checked": "2026-10-11"
+   "checked": "2026-10-26"
   },
   {
    "name": "European Conference on Visual Perception (ECVP)",
    "edition": "ECVP 2027 (49th European Conference on Visual Perception)",
    "location": "Padova, Italy",
    "region": "Europe",
-   "dates": "29 August – 2 September 2027",
+   "dates": "August 29 – September 2, 2027",
    "start_date": "2027-08-29",
    "deadlines": [],
    "status": "not announced",
-   "typical_timing": "Usually spring. For ECVP 2026, abstract submission and early-bird registration were extended to April 21, 2026, and the extension is described as customary.",
+   "typical_timing": "usually April. For ECVP 2026, the abstract and early-bird registration deadline was extended to April 21, and symposium proposals closed in late January.",
    "source_url": "https://ecvp.eu/",
    "official_url": "https://ecvp.eu/",
-   "checked": "2026-10-11"
+   "checked": "2026-10-26"
   },
   {
    "name": "AMLaP (Architectures and Mechanisms for Language Processing)",
    "edition": "AMLaP 2027",
    "location": "",
-   "region": "Europe",
+   "region": "Other",
    "dates": "",
    "start_date": "",
    "deadlines": [],
    "status": "not announced",
-   "typical_timing": "Abstract deadline usually falls in spring, around early May. The 2026 edition had a 1 May deadline, extended to 8 May, for an early-September conference.",
+   "typical_timing": "Abstract deadline usually falls in early May, about four months before a early-September conference. AMLaP 2026 (2–4 Sept 2026, Saarbrücken, now past) had an abstract deadline in early May 2026. LINGUIST List gave 1 May and Lingalert gave 8 May. The AMLaP 2027 host, dates and deadlines were not found.",
    "source_url": "https://www.amlap.org/",
    "official_url": "https://www.amlap.org/",
-   "checked": "2026-10-11"
+   "checked": "2026-10-26"
   },
   {
    "name": "HSP (Human Sentence Processing)",
-   "edition": "HSP 2027 (40th Annual Conference on Human Sentence Processing)",
-   "location": "West Lafayette, IN, United States",
+   "edition": "HSP 2027 (40th Annual Conference on Human Sentence Processing, HSP40)",
+   "location": "West Lafayette, United States",
    "region": "North America",
    "dates": "May 20-22, 2027",
    "start_date": "2027-05-20",
    "deadlines": [
     {
-     "label": "Abstract submission",
+     "label": "Abstracts",
      "date": "2027-01-15"
     }
    ],
@@ -230,7 +272,7 @@
    "typical_timing": "",
    "source_url": "https://www.hspsociety.org/conference",
    "official_url": "https://www.hspsociety.org/",
-   "checked": "2026-10-11"
+   "checked": "2026-10-26"
   },
   {
    "name": "MathPsych / ICCM",
@@ -241,10 +283,10 @@
    "start_date": "",
    "deadlines": [],
    "status": "not announced",
-   "typical_timing": "Submission deadlines usually fall in late February to early March (2024: Feb 28; 2025: Mar 4; 2026: Feb 28). The submission period usually opens in early January. Decisions usually come at the end of April. The conference itself is usually held in mid to late July.",
+   "typical_timing": "Usually late February. The 2024 call closed 28 February 2024, and the 2026 call closed 28 February 2026 (submissions opened in early January). Decisions were due around 30 April, and the meeting was held in July.",
    "source_url": "https://mathpsych.org/conference/23/",
    "official_url": "https://mathpsych.org",
-   "checked": "2026-10-11"
+   "checked": "2026-10-26"
   },
   {
    "name": "OHBM Annual Meeting",
@@ -255,11 +297,11 @@
    "start_date": "2027-06-26",
    "deadlines": [
     {
-     "label": "Content/abstract submissions open",
+     "label": "Content submission opens (posters, symposia, courses, roundtables)",
      "date": "2026-11-02"
     },
     {
-     "label": "Content/abstract submissions close",
+     "label": "Content submission closes (abstracts and symposia)",
      "date": "2026-12-14"
     }
    ],
@@ -267,60 +309,60 @@
    "typical_timing": "",
    "source_url": "https://www.humanbrainmapping.org/ohbm-annual-meeting-faq/",
    "official_url": "https://www.humanbrainmapping.org/ohbm-2027/",
-   "checked": "2026-10-11"
+   "checked": "2026-10-26"
   },
   {
    "name": "FENS Forum",
    "edition": "FENS Forum 2028",
-   "location": "Glasgow, United Kingdom",
+   "location": "Glasgow, Scotland, United Kingdom",
    "region": "Europe",
-   "dates": "8-12 July 2028",
+   "dates": "8–12 July 2028",
    "start_date": "2028-07-08",
    "deadlines": [],
    "status": "not announced",
-   "typical_timing": "Abstract and early registration deadlines usually fall in late January to February of the event year. For 2026, the early deadline was 27 Jan, extended to 5 Feb. For 2024, it was 9 Feb, extended to 20 Feb.",
-   "source_url": "https://fensforum.org/dates-and-deadlines/",
-   "official_url": "https://fensforum.org/",
-   "checked": "2026-10-11"
+   "typical_timing": "Usually late January to early February. For FENS Forum 2026, the abstract, early registration and travel grant deadline was 27 January 2026, then extended to 5 February 2026. A late-breaking abstract call followed in mid-to-late April (closing 27 April 2026).",
+   "source_url": "https://www.fens.org/meetings/fens-forum/past-forums",
+   "official_url": "https://www.fens.org",
+   "checked": "2026-10-26"
   },
   {
    "name": "SfN Neuroscience",
-   "edition": "Neuroscience 2026 (SfN Annual Meeting)",
+   "edition": "Neuroscience 2026 (SfN 56th Annual Meeting)",
    "location": "Washington, D.C., United States",
    "region": "North America",
    "dates": "November 14–18, 2026",
    "start_date": "2026-11-14",
    "deadlines": [
     {
-     "label": "Extended deadline for symposium/session proposals",
-     "date": "2026-01-26"
+     "label": "Regular abstracts (extended deadline)",
+     "date": "2026-06-11"
     },
     {
-     "label": "Abstracts (extended deadline, 2 p.m. EDT)",
-     "date": "2026-06-11"
+     "label": "Late-breaking abstracts open",
+     "date": "2026-09-08"
+    },
+    {
+     "label": "Deadline to change a virtual presentation to in-person",
+     "date": "2026-09-10"
     },
     {
      "label": "Late-breaking abstracts close",
      "date": "2026-09-15"
     },
     {
-     "label": "Advance registration ends",
+     "label": "Advance registration closes",
      "date": "2026-10-05"
     },
     {
-     "label": "Neuroscience Networking Event submissions",
-     "date": "2026-10-22"
-    },
-    {
-     "label": "Last day to switch from in-person to virtual-only presentation",
+     "label": "Deadline to change an in-person presentation to virtual",
      "date": "2026-11-05"
     }
    ],
    "status": "announced",
    "typical_timing": "",
-   "source_url": "https://www.sfn.org/meetings/neuroscience-2026/general-information/dates-and-deadlines",
+   "source_url": "https://scifig.ai/blog/sfn-poster-guidelines-and-template",
    "official_url": "https://www.sfn.org/meetings/neuroscience-2026",
-   "checked": "2026-10-11"
+   "checked": "2026-10-26"
   }
  ]
 }
