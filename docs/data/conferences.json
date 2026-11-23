@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16",
+ "updated": "2026-11-23",
  "conferences": [
   {
    "name": "CogSci (Cognitive Science Society)",
@@ -38,30 +38,17 @@
   },
   {
    "name": "Psychonomic Society Annual Meeting",
-   "edition": "Psychonomic Society 67th Annual Meeting (2026)",
-   "location": "San Diego, USA",
+   "edition": "Psychonomic Society 68th Annual Meeting 2027",
+   "location": "New Orleans, Louisiana, USA",
    "region": "North America",
-   "dates": "November 19-22, 2026",
-   "start_date": "2026-11-19",
-   "deadlines": [
-    {
-     "label": "Abstracts (talks and posters)",
-     "date": "2026-06-01"
-    },
-    {
-     "label": "Lowest-price registration ends",
-     "date": "2026-08-31"
-    },
-    {
-     "label": "Hotel room block deadline (Marriott Marquis San Diego Marina)",
-     "date": "2026-10-26"
-    }
-   ],
-   "status": "announced",
-   "typical_timing": "Abstract deadline is usually around June 1. The next meeting after this one, the 68th in New Orleans on November 18-21, 2027, has no published abstract deadline yet.",
+   "dates": "November 18-21, 2027",
+   "start_date": "2027-11-18",
+   "deadlines": [],
+   "status": "not announced",
+   "typical_timing": "Abstracts (talks and posters) were due June 1 for the 2026 meeting, and the call opened April 6. The symposia call closed April 1. Expect a similar schedule for 2027: symposia around April 1 and abstracts around early June.",
    "source_url": "https://www.psychonomic.org/page/timeline",
    "official_url": "https://www.psychonomic.org",
-   "checked": "2026-11-16"
+   "checked": "2026-11-23"
   },
   {
    "name": "ESCoP (European Society for Cognitive Psychology)",
